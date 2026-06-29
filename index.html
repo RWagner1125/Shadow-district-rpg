@@ -1,7 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- =========================
+       BASIC PAGE SETUP
+       Required for the browser to understand the page correctly.
+       ========================= -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Ashes & Dust - Character Creation</title>
+
+  <!-- =========================
+       MAIN STYLESHEET
+       This is what loads your dragon background, ornate card frame,
+       buttons, layout, colors, and hidden class.
+
+       If this line is missing, the page becomes plain white.
+       ========================= -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
 <body class="creation-theme step-0">
   <!-- =========================
        FULL PAGE BACKGROUND LAYERS
        These layers create the dark dragon atmosphere behind the character creation card.
+       Controlled by css/style.css.
        ========================= -->
   <div class="bg-dragon-overlay"></div>
   <div class="bg-gold-eyes"></div>
@@ -17,7 +40,9 @@
            ORNATE CARD FRAME IMAGE
            This is the fixed golden dragon card artwork.
            It stays visible for every character creation slide.
-           File used: creation-card-frame.png
+
+           Required file in project root:
+           creation-card-frame.png
            ========================= -->
       <div class="creation-card-frame" aria-hidden="true"></div>
 
@@ -48,5 +73,11 @@
     </section>
   </main>
 
+  <!-- =========================
+       CHARACTER CREATION JAVASCRIPT
+       This controls the Next/Back buttons, character choices,
+       localStorage save, and redirect to home.html.
+       ========================= -->
   <script src="js/app.js"></script>
 </body>
+</html>
