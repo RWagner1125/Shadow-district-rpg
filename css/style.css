@@ -287,3 +287,92 @@ nav button {
   background: #2b1a1a;
   border-color: #5a3333;
 }
+.journal-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.journal-list-panel h2 {
+  margin-top: 20px;
+}
+
+.journal-list-panel h2:first-child {
+  margin-top: 0;
+}
+
+.quest-list {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.journal-quest-card {
+  background: #241a13;
+  border: 1px solid #5c4329;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.journal-quest-card:hover {
+  border-color: #f1c36d;
+  background: #302116;
+}
+
+.journal-quest-card.active {
+  border-left: 4px solid #e6b764;
+}
+
+.journal-quest-card.completed {
+  border-left: 4px solid #6fbf73;
+  opacity: 0.9;
+}
+
+.journal-quest-card h3 {
+  margin: 0 0 6px;
+  color: #f1c36d;
+}
+
+.journal-quest-card p {
+  margin: 0;
+  color: #c9b797;
+}
+
+.quest-detail-box {
+  background: #120e0b;
+  border: 1px solid #5c4329;
+  padding: 18px;
+  border-radius: 8px;
+  line-height: 1.7;
+}
+
+.quest-detail-box h3 {
+  color: #f1c36d;
+  margin-top: 0;
+}
+
+.quest-status-active {
+  color: #e6b764;
+  font-weight: bold;
+}
+
+.quest-status-completed {
+  color: #6fbf73;
+  font-weight: bold;
+}
+
+.objective-box {
+  background: #241a13;
+  border-left: 4px solid #b88746;
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 4px;
+}
+
+@media (max-width: 900px) {
+  .journal-layout {
+    grid-template-columns: 1fr;
+  }
+}
