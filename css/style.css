@@ -172,83 +172,72 @@ select {
 
 /* ============================================================
    CREATION CARD WRAPPER
-   This is no longer a plain colored box.
+   This is the living card container.
 
-   It now holds:
-   1. creation-card-frame.png as the visual frame
-   2. live HTML text/forms/buttons on top of the frame
+   Important:
+   The card changes size depending on the current character
+   creation step.
 
-   The frame does not change between slides.
-   Only the content changes.
+   The ornate frame image is attached to this card and stretches
+   with the card shape.
    ============================================================ */
 
 .creation-card {
-  width: 100%;
-  max-width: 1100px;
-  min-height: 720px;
+  width: min(92vw, 980px);
+  min-height: 640px;
   position: relative;
   display: flex;
   align-items: stretch;
   justify-content: center;
+  transition: width 0.35s ease, min-height 0.35s ease;
 }
 
 
 /* ============================================================
    ORNATE CARD FRAME IMAGE
-   This displays the exact golden dragon card frame.
+   This attaches the golden dragon frame directly to the card.
 
-   File used:
-   creation-card-frame.png
+   Important change:
+   background-size is now 100% 100%.
 
-   File location:
-   ROOT of the project
-
-   CSS path:
-   ../creation-card-frame.png
-
-   Important:
-   This is only visual. It does not block clicks.
+   That means the frame stretches with the card when the card
+   becomes wider for lineage, ethnicity, and origin choices.
    ============================================================ */
 
 .creation-card-frame {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: url("../creation-card-frame.png") center center / contain no-repeat;
+  background: url("../creation-card-frame.png") center center / 100% 100% no-repeat;
   pointer-events: none;
 }
 
 
 /* ============================================================
    CARD CONTENT AREA
-   This is the safe text/form/button zone inside the ornate card.
+   This is the safe zone where text, choices, forms, and buttons sit.
 
-   Adjust this section if:
-   - text is too high
-   - text is too low
-   - text is too far left
-   - text is too far right
-   - buttons are too close to the tail
+   This area stays attached to the same card frame.
+   The step-specific CSS below changes its width and spacing.
    ============================================================ */
 
 .creation-card-content {
   position: relative;
   z-index: 5;
   width: 100%;
-  max-width: 780px;
-  min-height: 720px;
+  max-width: 720px;
+  min-height: 640px;
 
-  /* Text placement inside the card frame */
-  padding-top: 135px;
-  padding-right: 95px;
-  padding-bottom: 120px;
-  padding-left: 95px;
+  padding-top: 120px;
+  padding-right: 80px;
+  padding-bottom: 105px;
+  padding-left: 80px;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  transition: max-width 0.35s ease, padding 0.35s ease, min-height 0.35s ease;
 }
-
 
 /* ============================================================
    CREATION TITLE
@@ -348,29 +337,34 @@ select:focus {
 
 
 /* ============================================================
-   CHOICE CARD GRID
-   Used for lineage, ethnicity, gender, and origin choices.
+   DEFAULT CHOICE CARD GRID
+   Used by smaller choice screens unless a step-specific layout
+   overrides it below.
    ============================================================ */
 
 .choice-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 16px;
 }
 
 
 /* ============================================================
    CHOICE CARDS
-   Individual clickable selection boxes.
+   Individual selectable cards.
+
+   These are made slightly tighter so horizontal layouts fit
+   inside the ornate frame.
    ============================================================ */
 
 .choice-card {
-  background: rgba(22, 11, 6, 0.9);
-  border: 1px solid rgba(255, 173, 72, 0.26);
-  padding: 14px;
+  background: rgba(22, 11, 6, 0.88);
+  border: 1px solid rgba(255, 173, 72, 0.32);
+  padding: 12px;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.25s ease;
+  min-height: 120px;
 }
 
 .choice-card:hover {
@@ -394,14 +388,139 @@ select:focus {
 .choice-card h3 {
   margin: 0 0 8px;
   color: #ffcc74;
+  font-size: 1.08rem;
 }
 
 .choice-card p {
-  margin: 0 0 8px;
+  margin: 0 0 7px;
   color: #e3cfaa;
-  font-size: 0.95rem;
+  font-size: 0.84rem;
+  line-height: 1.5;
 }
 
+/* ============================================================
+   STEP-SPECIFIC CARD LAYOUTS
+   These make the ornate card resize depending on which
+   character creation screen is active.
+
+   Step map from app.js:
+   step-4 = Lineage selection
+   step-5 = Ethnicity selection
+   step-7 = Origin selection
+   step-8 = Lowborn Record summary
+   ============================================================ */
+
+
+/* =========================
+   STEP 4: LINEAGE SELECTION
+   5 options displayed horizontally in one row.
+   ========================= */
+
+.creation-theme.step-4 .creation-card {
+  width: min(96vw, 1500px);
+  min-height: 620px;
+}
+
+.creation-theme.step-4 .creation-card-content {
+  max-width: 1240px;
+  min-height: 620px;
+  padding-top: 105px;
+  padding-right: 115px;
+  padding-bottom: 105px;
+  padding-left: 115px;
+}
+
+.creation-theme.step-4 .choice-grid {
+  grid-template-columns: repeat(5, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+.creation-theme.step-4 .choice-card {
+  min-height: 185px;
+}
+
+
+/* =========================
+   STEP 5: ETHNICITY SELECTION
+   6 options displayed as 2 rows of 3.
+   ========================= */
+
+.creation-theme.step-5 .creation-card {
+  width: min(96vw, 1300px);
+  min-height: 680px;
+}
+
+.creation-theme.step-5 .creation-card-content {
+  max-width: 980px;
+  min-height: 680px;
+  padding-top: 105px;
+  padding-right: 110px;
+  padding-bottom: 110px;
+  padding-left: 110px;
+}
+
+.creation-theme.step-5 .choice-grid {
+  grid-template-columns: repeat(3, minmax(210px, 1fr));
+  gap: 16px;
+}
+
+.creation-theme.step-5 .choice-card {
+  min-height: 145px;
+}
+
+
+/* =========================
+   STEP 7: ORIGIN SELECTION
+   8 options displayed as 2 rows of 4.
+   ========================= */
+
+.creation-theme.step-7 .creation-card {
+  width: min(98vw, 1500px);
+  min-height: 760px;
+}
+
+.creation-theme.step-7 .creation-card-content {
+  max-width: 1220px;
+  min-height: 760px;
+  padding-top: 95px;
+  padding-right: 115px;
+  padding-bottom: 110px;
+  padding-left: 115px;
+}
+
+.creation-theme.step-7 .choice-grid {
+  grid-template-columns: repeat(4, minmax(210px, 1fr));
+  gap: 14px;
+}
+
+.creation-theme.step-7 .choice-card {
+  min-height: 190px;
+}
+
+
+/* =========================
+   STEP 8: LOWBORN RECORD
+   Summary screen returns to a centered card shape.
+   ========================= */
+
+.creation-theme.step-8 .creation-card {
+  width: min(92vw, 1050px);
+  min-height: 650px;
+}
+
+.creation-theme.step-8 .creation-card-content {
+  max-width: 760px;
+  min-height: 650px;
+  padding-top: 115px;
+  padding-right: 85px;
+  padding-bottom: 105px;
+  padding-left: 85px;
+}
+
+.creation-theme.step-8 .summary-box {
+  max-width: 620px;
+  margin: 0 auto;
+}
 
 /* ============================================================
    SUMMARY BOX
@@ -798,8 +917,35 @@ nav button {
 
 /* ============================================================
    RESPONSIVE DESIGN
-   This section makes pages work better on smaller screens.
+   Keeps the card usable on smaller screens.
+
+   On smaller screens, the horizontal layouts collapse so the
+   player can still read and select everything.
    ============================================================ */
+
+@media (max-width: 1200px) {
+  .creation-theme.step-4 .choice-grid {
+    grid-template-columns: repeat(3, minmax(190px, 1fr));
+  }
+
+  .creation-theme.step-7 .choice-grid {
+    grid-template-columns: repeat(2, minmax(230px, 1fr));
+  }
+
+  .creation-theme.step-4 .creation-card,
+  .creation-theme.step-5 .creation-card,
+  .creation-theme.step-7 .creation-card {
+    width: min(96vw, 1100px);
+  }
+
+  .creation-theme.step-4 .creation-card-content,
+  .creation-theme.step-5 .creation-card-content,
+  .creation-theme.step-7 .creation-card-content {
+    max-width: 860px;
+    padding-right: 85px;
+    padding-left: 85px;
+  }
+}
 
 @media (max-width: 1000px) {
   .game-layout,
@@ -813,31 +959,42 @@ nav button {
   }
 
   .creation-page {
-    padding: 22px;
+    padding: 12px;
   }
 
-  .creation-card {
-    max-width: 100%;
-    min-height: 680px;
+  .creation-card,
+  .creation-theme.step-4 .creation-card,
+  .creation-theme.step-5 .creation-card,
+  .creation-theme.step-7 .creation-card,
+  .creation-theme.step-8 .creation-card {
+    width: 100%;
+    min-height: 850px;
   }
 
-  .creation-card-content {
-    max-width: 700px;
-    min-height: 680px;
+  .creation-card-content,
+  .creation-theme.step-4 .creation-card-content,
+  .creation-theme.step-5 .creation-card-content,
+  .creation-theme.step-7 .creation-card-content,
+  .creation-theme.step-8 .creation-card-content {
+    max-width: 760px;
+    min-height: 850px;
 
-    /* Smaller screen safe-area adjustment */
-    padding-top: 125px;
-    padding-right: 80px;
-    padding-bottom: 110px;
-    padding-left: 80px;
+    padding-top: 130px;
+    padding-right: 70px;
+    padding-bottom: 115px;
+    padding-left: 70px;
   }
 
   .creation-card-content h1 {
-    font-size: 1.75rem;
+    font-size: 1.8rem;
   }
 
-  .choice-grid {
-    grid-template-columns: 1fr;
+  .choice-grid,
+  .creation-theme.step-4 .choice-grid,
+  .creation-theme.step-5 .choice-grid,
+  .creation-theme.step-7 .choice-grid {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+    gap: 12px;
   }
 
   .bg-dragon-overlay {
@@ -846,18 +1003,25 @@ nav button {
 }
 
 @media (max-width: 700px) {
-  .creation-card {
-    min-height: 650px;
+  .creation-card,
+  .creation-theme.step-4 .creation-card,
+  .creation-theme.step-5 .creation-card,
+  .creation-theme.step-7 .creation-card,
+  .creation-theme.step-8 .creation-card {
+    min-height: 950px;
   }
 
-  .creation-card-content {
-    min-height: 650px;
+  .creation-card-content,
+  .creation-theme.step-4 .creation-card-content,
+  .creation-theme.step-5 .creation-card-content,
+  .creation-theme.step-7 .creation-card-content,
+  .creation-theme.step-8 .creation-card-content {
+    min-height: 950px;
 
-    /* Phone-sized safe-area adjustment */
-    padding-top: 115px;
-    padding-right: 55px;
-    padding-bottom: 95px;
-    padding-left: 55px;
+    padding-top: 125px;
+    padding-right: 45px;
+    padding-bottom: 105px;
+    padding-left: 45px;
   }
 
   .creation-card-content h1 {
@@ -866,8 +1030,15 @@ nav button {
 
   .story-text,
   .creation-form {
-    font-size: 0.95rem;
-    line-height: 1.65;
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .choice-grid,
+  .creation-theme.step-4 .choice-grid,
+  .creation-theme.step-5 .choice-grid,
+  .creation-theme.step-7 .choice-grid {
+    grid-template-columns: 1fr;
   }
 
   button {
