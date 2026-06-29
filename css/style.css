@@ -151,3 +151,15 @@ footer {
     align-items: flex-start;
   }
 }
+.game-message {
+  background: #120f0d;
+  border: 1px solid #b88746;
+  color: #f5e6c8;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 6px;
+}
+
+.hidden {
+  display: none;
+}
