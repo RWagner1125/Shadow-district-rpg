@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ashes & Dust - Journal</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="top-bar">
+    <div>
+      <h1>Journal</h1>
+      <p>Your record of active duties, completed deeds, and unfinished paths.</p>
+    </div>
+
+    <nav>
+      <button onclick="window.location.href='home.html'">Home</button>
+      <button>Character</button>
+      <button>Town</button>
+      <button>Jobs</button>
+      <button>Education</button>
+      <button onclick="window.location.href='journal.html'">Journal</button>
+      <button>Guild</button>
+      <button>Market</button>
+      <button>World</button>
+      <button onclick="window.location.href='settings.html'">Settings</button>
+    </nav>
+  </header>
+
+  <main class="journal-layout">
+    <section class="panel journal-list-panel">
+      <h2>Active Quests</h2>
+      <div id="activeQuestList" class="quest-list"></div>
+
+      <h2>Completed Quests</h2>
+      <div id="completedQuestList" class="quest-list"></div>
+    </section>
+
+    <section class="panel journal-detail-panel">
+      <h2 id="questDetailTitle">Select a Quest</h2>
+
+      <div id="questDetailBox" class="quest-detail-box">
+        <p>
+          Select an active or completed quest from the journal to view its objective,
+          destination, contact, and reward details.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/journal.js"></script>
+</body>
+</html>
