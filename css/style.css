@@ -51,7 +51,7 @@ select {
       rgba(0, 0, 0, 0.26),
       rgba(0, 0, 0, 0.58)
     ),
-    url("../images/dragon-bg.png") center center / cover no-repeat;
+    url("../dragon-bg.png") center center / cover no-repeat;
   opacity: 0.92;
   filter: brightness(0.72) contrast(1.18) saturate(1.05);
   transition: opacity 0.8s ease, filter 0.8s ease, transform 0.8s ease;
