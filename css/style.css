@@ -257,3 +257,33 @@ nav button {
     align-items: flex-start;
   }
 }
+.danger-card {
+  background: #241111;
+  border: 1px solid #8a2f2f;
+  padding: 14px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+}
+
+.danger-card h3 {
+  color: #ff8b8b;
+  margin-top: 0;
+}
+
+.danger-button {
+  background: #6b1f1f;
+  border: 1px solid #d15a5a;
+  color: #ffe5e5;
+  margin-top: 12px;
+}
+
+.danger-button:hover {
+  background: #8a2a2a;
+}
+
+.danger-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  background: #2b1a1a;
+  border-color: #5a3333;
+}
