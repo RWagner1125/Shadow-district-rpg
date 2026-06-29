@@ -51,7 +51,9 @@ document.getElementById("completeQuestBtn").addEventListener("click", function (
   player.capitalReputation += 25;
   player.hiddenStats.ambition += 2;
 
-  alert("Quest completed: Hands of Ash and Stone. You gained +2 Strength, +1 Vitality, 250 gold, and +25 Capital Reputation.");
+  const messageBox = document.getElementById("gameMessage");
+messageBox.textContent = "Quest completed: Hands of Ash and Stone. You gained +2 Strength, +1 Vitality, 250 gold, and +25 Capital Reputation.";
+messageBox.classList.remove("hidden");
 
   updateUI();
 });
