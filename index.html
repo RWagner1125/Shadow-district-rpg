@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ashes & Dust RPG</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="top-bar">
+    <div>
+      <h1>Ashes & Dust</h1>
+      <p>Created from ashes and dust beneath the banners of kingdoms you did not build.</p>
+    </div>
+
+    <nav>
+      <button>Character</button>
+      <button>Town</button>
+      <button>Guild</button>
+      <button>Market</button>
+      <button>World</button>
+    </nav>
+  </header>
+
+  <main class="game-layout">
+    <section class="panel character-panel">
+      <h2>Character</h2>
+
+      <div class="character-name">
+        <h3 id="playerName">Unnamed Lowborn</h3>
+        <p id="playerTitle">Lowborn Commoner</p>
+      </div>
+
+      <div class="info-grid">
+        <p><strong>Lineage:</strong> <span id="lineage">Caucasian / European</span></p>
+        <p><strong>Origin:</strong> <span id="origin">Orphaned Laborer</span></p>
+        <p><strong>Role Path:</strong> <span id="rolePath">Undecided</span></p>
+        <p><strong>Capital:</strong> <span id="capital">Ashen Crown</span></p>
+      </div>
+
+      <h3>Visible Stats</h3>
+      <div class="stats-grid">
+        <p>Strength: <span id="strength">5</span></p>
+        <p>Vitality: <span id="vitality">5</span></p>
+        <p>Intelligence: <span id="intelligence">5</span></p>
+        <p>Wisdom: <span id="wisdom">5</span></p>
+        <p>Dexterity: <span id="dexterity">5</span></p>
+      </div>
+
+      <h3>Hidden Soul Reading</h3>
+      <div class="soul-reading">
+        <p><strong>Divine Presence:</strong> Fortune is quiet.</p>
+        <p><strong>Public Nature:</strong> Unknown to the people.</p>
+        <p><strong>Inner Path:</strong> Unwritten.</p>
+      </div>
+    </section>
+
+    <section class="panel main-panel">
+      <h2>Capital District</h2>
+      <p>
+        The capital was built before your name mattered. Nobles own the roads,
+        elders control the laws, and merchants control the economy.
+      </p>
+
+      <div class="rank-card">
+        <h3>Next Social Rank: Recognized Citizen</h3>
+        <ul>
+          <li>Donate 25,000 gold to your capital</li>
+          <li>Reach Rank 5 in Job/Work</li>
+          <li>Earn positive capital reputation</li>
+          <li>Gain one respected NPC reference</li>
+          <li>Complete a Recognition Quest</li>
+        </ul>
+
+        <div class="progress-box">
+          <p>Capital Donation: <span id="donation">0</span> / 25,000 Gold</p>
+          <p>Job Rank: <span id="jobRank">1</span> / 5</p>
+          <p>Capital Reputation: <span id="capitalRep">0</span></p>
+        </div>
+      </div>
+
+      <div class="quest-card">
+        <h3>Current Origin Quest</h3>
+        <p><strong id="questName">Hands of Ash and Stone</strong></p>
+        <p>
+          The capital storehouse is short on workers. Haul grain, repair crates,
+          and prove that even a lowborn can be useful.
+        </p>
+
+        <button id="completeQuestBtn">Complete Quest</button>
+      </div>
+    </section>
+
+    <aside class="panel side-panel">
+      <h2>Town Projects</h2>
+
+      <div class="project-card">
+        <h3>Market Square Restoration</h3>
+        <p>Unlocks player stalls and cheaper market listing fees.</p>
+        <p>Gold: 18,400 / 50,000</p>
+        <p>Timber: 720 / 1,000</p>
+        <p>Labor: 96 / 150 hours</p>
+        <button>Contribute Labor</button>
+      </div>
+
+      <div class="project-card">
+        <h3>Engineering Office</h3>
+        <p>Engineers must research construction plans before advanced buildings can begin.</p>
+        <p>Research Plans: 1 / 3</p>
+        <p>Tools: 44 / 100</p>
+        <button>View Requirements</button>
+      </div>
+
+      <h2>Guild Requests</h2>
+
+      <div class="request-card">
+        <h3>Repair the Outer Wall</h3>
+        <p>Town request for guilds. Rewards guild reputation and town trust.</p>
+        <button>Inspect Request</button>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <p>NPCs control the old world. Players build the new one.</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
