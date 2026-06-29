@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ashes & Dust - Settings</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="top-bar">
+    <div>
+      <h1>Settings</h1>
+      <p>Manage your character record and account options.</p>
+    </div>
+
+    <nav>
+      <button onclick="window.location.href='home.html'">Home</button>
+      <button>Character</button>
+      <button>Capital</button>
+      <button>Guild</button>
+      <button>Market</button>
+      <button>World</button>
+    </nav>
+  </header>
+
+  <main class="game-layout">
+    <section class="panel main-panel">
+      <h2>Character Settings</h2>
+
+      <div class="rank-card">
+        <h3>Current Character</h3>
+        <p><strong>Name:</strong> <span id="settingsName">Unknown</span></p>
+        <p><strong>Lineage:</strong> <span id="settingsLineage">Unknown</span></p>
+        <p><strong>Origin:</strong> <span id="settingsOrigin">Unknown</span></p>
+      </div>
+
+      <div class="danger-card">
+        <h3>Delete Character</h3>
+        <p>
+          This will permanently delete your saved character from this browser.
+          This action cannot be undone.
+        </p>
+
+        <p>
+          To confirm deletion, type <strong>DELETE</strong> below.
+        </p>
+
+        <input id="deleteConfirmInput" type="text" placeholder="Type DELETE to confirm" />
+
+        <button id="deleteCharacterBtn" class="danger-button" disabled>
+          Delete Character
+        </button>
+
+        <p id="settingsMessage" class="game-message hidden"></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/settings.js"></script>
+</body>
+</html>
