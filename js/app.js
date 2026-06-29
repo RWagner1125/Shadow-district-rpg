@@ -314,11 +314,11 @@ nextBtn.addEventListener("click", function () {
     return;
   }
 
-  if (currentStep === 7) {
-    localStorage.setItem("shadowDistrictCharacter", JSON.stringify(character));
-    alert("Character created. Next we will send this character to the home page.");
-    return;
-  }
+if (currentStep === 7) {
+  localStorage.setItem("shadowDistrictCharacter", JSON.stringify(character));
+  window.location.href = "home.html";
+  return;
+}
 
   currentStep++;
   renderStep();
