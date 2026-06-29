@@ -1,17 +1,125 @@
+/* ============================================================
+   SHADOW DISTRICT RPG - CHARACTER CREATION SCRIPT
+   ============================================================
+
+   FILE:
+   js/app.js
+
+   PURPOSE:
+   This file controls the opening character creation page.
+
+   It handles:
+   - redirecting existing characters to home.html
+   - story slide progression
+   - name entry
+   - lineage selection
+   - ethnicity selection
+   - gender selection
+   - origin selection
+   - final character summary
+   - saving the character to localStorage
+   - sending the player to home.html after creation
+
+   IMPORTANT:
+   This file works with index.html and css/style.css.
+
+   The visual card theme is mostly controlled by CSS.
+   This JavaScript only changes the body class with updateCreationTheme().
+   ============================================================ */
+
+
+/* ============================================================
+   EXISTING CHARACTER CHECK
+   If the player already created a character in this browser,
+   skip character creation and send them to the home page.
+
+   This prevents the deploy link from forcing character creation
+   every time the player revisits the website.
+   ============================================================ */
+
 const existingCharacter = localStorage.getItem("shadowDistrictCharacter");
 
 if (existingCharacter) {
   window.location.href = "home.html";
 }
+
+
+/* ============================================================
+   CHARACTER CREATION STEP TRACKER
+   currentStep controls which screen the player sees.
+
+   Step list:
+   0 = Opening story slide 1
+   1 = Opening story slide 2
+   2 = Opening story slide 3
+   3 = Name entry
+   4 = Lineage selection
+   5 = Ethnicity selection
+   6 = Gender selection
+   7 = Origin selection
+   8 = Final summary / Create Character
+   ============================================================ */
+
 let currentStep = 0;
+
+
+/* ============================================================
+   CHARACTER OBJECT
+   This stores the character choices while the player creates them.
+
+   Later, when the player clicks "Create Character",
+   this object is saved into localStorage as:
+
+   shadowDistrictCharacter
+   ============================================================ */
 
 const character = {
   name: "",
   lineage: "",
   ethnicity: "",
   gender: "",
-  origin: ""
+  origin: "",
+  title: "Lowborn Commoner",
+  capital: "Ashen Crown",
+  rolePath: "Undecided",
+
+  stats: {
+    strength: 5,
+    vitality: 5,
+    intelligence: 5,
+    wisdom: 5,
+    dexterity: 5
+  },
+
+  hiddenStats: {
+    luck: 10,
+    divineFavor: 0,
+    malice: 0,
+    honor: 0,
+    ambition: 0,
+    guile: 0,
+    bloodguilt: 0
+  },
+
+  progress: {
+    gold: 100,
+    donation: 0,
+    jobRank: 1,
+    capitalReputation: 0,
+    recognizedCitizen: false
+  }
 };
+
+
+/* ============================================================
+   OPENING STORY SLIDES
+   These are the first three text slides before the player
+   begins entering character information.
+
+   To add another story slide:
+   1. Add another object to this array.
+   2. Update renderStep() step numbers if needed.
+   ============================================================ */
 
 const storySlides = [
   {
@@ -53,6 +161,15 @@ const storySlides = [
   }
 ];
 
+
+/* ============================================================
+   LINEAGE OPTIONS
+   These are the broad ancestry/civilization starting paths.
+
+   The player chooses one lineage first.
+   Then the ethnicity list changes based on that selected lineage.
+   ============================================================ */
+
 const lineageOptions = [
   {
     name: "Caucasian / European",
@@ -62,24 +179,35 @@ const lineageOptions = [
   {
     name: "Asian",
     description: "Born near imperial cities, shrine roads, monasteries, trade ports, disciplined schools, and old dynasties.",
-    status: "comingSoon"
+    status: "available"
   },
   {
     name: "African",
     description: "Born among ancient tribal kingdoms, savanna routes, river settlements, spirit lands, and desert empires.",
-    status: "comingSoon"
+    status: "available"
   },
   {
     name: "Hispanic / South American",
     description: "Born near jungle cities, river villages, coastal routes, old ruins, stone districts, and sacred lands.",
-    status: "comingSoon"
+    status: "available"
   },
   {
     name: "Indian / Indic",
     description: "Born near temple cities, sacred markets, river capitals, mystic academies, and scholarly houses.",
-    status: "comingSoon"
+    status: "available"
   }
 ];
+
+
+/* ============================================================
+   ETHNICITY OPTIONS BY LINEAGE
+   These lists appear after the player chooses a lineage.
+
+   To add new ethnicities:
+   Find the correct lineage name and add another object with:
+   - name
+   - description
+   ============================================================ */
 
 const ethnicityOptionsByLineage = {
   "Caucasian / European": [
@@ -206,6 +334,13 @@ const ethnicityOptionsByLineage = {
   ]
 };
 
+
+/* ============================================================
+   GENDER OPTIONS
+   These currently affect story flavor only.
+   They do not restrict class paths or stats.
+   ============================================================ */
+
 const genderOptions = [
   {
     name: "Male",
@@ -216,6 +351,18 @@ const genderOptions = [
     description: "Your life was shaped by survival, judgment, labor, and the will to rise."
   }
 ];
+
+
+/* ============================================================
+   ORIGIN OPTIONS
+   These decide the player's starting hardship and first questline.
+
+   Later, each origin can trigger:
+   - a unique origin quest
+   - unique starting skill
+   - unique NPC contact
+   - small stat reward after completing the origin quest
+   ============================================================ */
 
 const originOptions = [
   {
@@ -260,13 +407,54 @@ const originOptions = [
   }
 ];
 
+
+/* ============================================================
+   DOM ELEMENT REFERENCES
+   These grab the HTML elements from index.html.
+
+   If one of these IDs is changed in index.html,
+   it must also be changed here.
+   ============================================================ */
+
 const screenTitle = document.getElementById("screenTitle");
 const storyText = document.getElementById("storyText");
 const creationForm = document.getElementById("creationForm");
 const nextBtn = document.getElementById("nextBtn");
 const backBtn = document.getElementById("backBtn");
 
+
+/* ============================================================
+   CREATION THEME UPDATE
+   This controls the body class for visual mood progression.
+
+   CSS expects:
+   creation-theme step-0
+   creation-theme step-1
+   creation-theme step-2
+   etc.
+
+   This affects:
+   - dragon background intensity
+   - golden atmosphere glow
+   - slide mood styling
+   ============================================================ */
+
+function updateCreationTheme() {
+  document.body.className = `creation-theme step-${currentStep}`;
+}
+
+
+/* ============================================================
+   MAIN RENDER FUNCTION
+   This function decides which screen to show based on currentStep.
+
+   Every time the player clicks Next or Back,
+   renderStep() runs again and refreshes the visible content.
+   ============================================================ */
+
 function renderStep() {
+  updateCreationTheme();
+
   backBtn.classList.toggle("hidden", currentStep === 0);
 
   storyText.classList.add("hidden");
@@ -289,6 +477,12 @@ function renderStep() {
   }
 }
 
+
+/* ============================================================
+   STORY SLIDE RENDERER
+   Shows the opening story slides.
+   ============================================================ */
+
 function renderStorySlide() {
   const slide = storySlides[currentStep];
 
@@ -298,6 +492,12 @@ function renderStorySlide() {
   storyText.classList.remove("hidden");
   nextBtn.textContent = "Next";
 }
+
+
+/* ============================================================
+   NAME STEP
+   Player types their character name here.
+   ============================================================ */
 
 function renderNameStep() {
   screenTitle.textContent = "Name the Lowborn";
@@ -317,6 +517,12 @@ function renderNameStep() {
   nextBtn.textContent = "Next";
 }
 
+
+/* ============================================================
+   LINEAGE STEP
+   Player chooses broad ancestry/civilization path.
+   ============================================================ */
+
 function renderLineageStep() {
   screenTitle.textContent = "Choose Your Lineage";
 
@@ -331,7 +537,7 @@ function renderLineageStep() {
         <div class="choice-card ${character.lineage === option.name ? "selected" : ""}" data-choice="${option.name}" data-type="lineage">
           <h3>${option.name}</h3>
           <p>${option.description}</p>
-          ${option.status === "comingSoon" ? `<p><strong>Available for planning. Full opening story comes later.</strong></p>` : `<p><strong>Opening path ready.</strong></p>`}
+          <p><strong>Opening path ready.</strong></p>
         </div>
       `).join("")}
     </div>
@@ -341,6 +547,12 @@ function renderLineageStep() {
   nextBtn.textContent = "Next";
   attachChoiceListeners();
 }
+
+
+/* ============================================================
+   ETHNICITY STEP
+   Ethnicity options change depending on selected lineage.
+   ============================================================ */
 
 function renderEthnicityStep() {
   screenTitle.textContent = "Choose Your Ethnicity";
@@ -368,6 +580,13 @@ function renderEthnicityStep() {
   attachChoiceListeners();
 }
 
+
+/* ============================================================
+   GENDER STEP
+   Player chooses gender.
+   Currently story-flavor only.
+   ============================================================ */
+
 function renderGenderStep() {
   screenTitle.textContent = "Choose Your Gender";
 
@@ -391,6 +610,12 @@ function renderGenderStep() {
   nextBtn.textContent = "Next";
   attachChoiceListeners();
 }
+
+
+/* ============================================================
+   ORIGIN STEP
+   Player chooses lowborn origin.
+   ============================================================ */
 
 function renderOriginStep() {
   screenTitle.textContent = "Choose Your Lowborn Origin";
@@ -416,16 +641,25 @@ function renderOriginStep() {
   attachChoiceListeners();
 }
 
+
+/* ============================================================
+   SUMMARY STEP
+   Final confirmation screen before saving the character.
+   ============================================================ */
+
 function renderSummaryStep() {
   screenTitle.textContent = "Lowborn Record";
 
   creationForm.innerHTML = `
     <div class="summary-box">
       <p><strong>Name:</strong> ${character.name}</p>
+      <p><strong>Title:</strong> ${character.title}</p>
       <p><strong>Lineage:</strong> ${character.lineage}</p>
       <p><strong>Ethnicity:</strong> ${character.ethnicity}</p>
       <p><strong>Gender:</strong> ${character.gender}</p>
       <p><strong>Origin:</strong> ${character.origin}</p>
+      <p><strong>Capital:</strong> ${character.capital}</p>
+      <p><strong>Role Path:</strong> ${character.rolePath}</p>
 
       <p>
         You are not yet a citizen. You are not yet a class. You are merely a lowborn soul
@@ -438,6 +672,19 @@ function renderSummaryStep() {
   nextBtn.textContent = "Create Character";
 }
 
+
+/* ============================================================
+   CHOICE CARD CLICK LISTENERS
+   This function is used by lineage, ethnicity, gender, and origin.
+
+   It reads:
+   data-type="lineage"
+   data-choice="Caucasian / European"
+
+   Then saves that choice to:
+   character.lineage
+   ============================================================ */
+
 function attachChoiceListeners() {
   const cards = document.querySelectorAll(".choice-card");
 
@@ -448,6 +695,10 @@ function attachChoiceListeners() {
 
       character[type] = choice;
 
+      /*
+        If the player changes lineage after already choosing an ethnicity,
+        reset ethnicity so they cannot keep an ethnicity from the wrong lineage.
+      */
       if (type === "lineage") {
         character.ethnicity = "";
       }
@@ -457,6 +708,12 @@ function attachChoiceListeners() {
     });
   });
 }
+
+
+/* ============================================================
+   VALIDATION
+   Stops the player from moving forward without making required choices.
+   ============================================================ */
 
 function validateStep() {
   if (currentStep === 3) {
@@ -492,6 +749,17 @@ function validateStep() {
   return true;
 }
 
+
+/* ============================================================
+   NEXT BUTTON EVENT
+   Handles moving forward through the creation process.
+
+   On final step:
+   - saves character to localStorage
+   - creates starter journal if missing
+   - redirects to home.html
+   ============================================================ */
+
 nextBtn.addEventListener("click", function () {
   if (!validateStep()) {
     return;
@@ -499,6 +767,20 @@ nextBtn.addEventListener("click", function () {
 
   if (currentStep === 8) {
     localStorage.setItem("shadowDistrictCharacter", JSON.stringify(character));
+
+    /*
+      Create starter journal storage if it does not exist yet.
+      The actual first quest is still added by journal.js when the journal page loads.
+    */
+    const existingJournal = localStorage.getItem("shadowDistrictJournal");
+
+    if (!existingJournal) {
+      localStorage.setItem("shadowDistrictJournal", JSON.stringify({
+        activeQuests: [],
+        completedQuests: []
+      }));
+    }
+
     window.location.href = "home.html";
     return;
   }
@@ -507,11 +789,23 @@ nextBtn.addEventListener("click", function () {
   renderStep();
 });
 
+
+/* ============================================================
+   BACK BUTTON EVENT
+   Allows player to move backward through creation steps.
+   ============================================================ */
+
 backBtn.addEventListener("click", function () {
   if (currentStep > 0) {
     currentStep--;
     renderStep();
   }
 });
+
+
+/* ============================================================
+   INITIAL PAGE LOAD
+   Starts the character creation screen at step 0.
+   ============================================================ */
 
 renderStep();
