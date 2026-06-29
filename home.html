@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ashes & Dust - Home</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="top-bar">
+    <div>
+      <h1>Ashes & Dust</h1>
+      <p>NPCs control the old world. Players build the new one.</p>
+    </div>
+
+    <nav>
+      <button>Character</button>
+      <button>Capital</button>
+      <button>Guild</button>
+      <button>Market</button>
+      <button>World</button>
+    </nav>
+  </header>
+
+  <main class="game-layout">
+    <section class="panel character-panel">
+      <h2>Character Record</h2>
+
+      <div class="character-name">
+        <h3 id="homeName">Unnamed Lowborn</h3>
+        <p id="homeTitle">Lowborn Commoner</p>
+      </div>
+
+      <div class="info-grid">
+        <p><strong>Lineage:</strong> <span id="homeLineage"></span></p>
+        <p><strong>Ethnicity:</strong> <span id="homeEthnicity"></span></p>
+        <p><strong>Gender:</strong> <span id="homeGender"></span></p>
+        <p><strong>Origin:</strong> <span id="homeOrigin"></span></p>
+        <p><strong>Capital:</strong> <span id="homeCapital">Ashen Crown</span></p>
+      </div>
+
+      <h3>Visible Stats</h3>
+      <div class="stats-grid">
+        <p>Strength: <span id="homeStrength">5</span></p>
+        <p>Vitality: <span id="homeVitality">5</span></p>
+        <p>Intelligence: <span id="homeIntelligence">5</span></p>
+        <p>Wisdom: <span id="homeWisdom">5</span></p>
+        <p>Dexterity: <span id="homeDexterity">5</span></p>
+      </div>
+    </section>
+
+    <section class="panel main-panel">
+      <h2>Lowborn Beginning</h2>
+      <p id="welcomeText">
+        You have entered the capital as one of the nameless lowborn.
+      </p>
+
+      <div class="rank-card">
+        <h3>Next Social Rank: Recognized Citizen</h3>
+        <ul>
+          <li>Donate 25,000 gold to your capital</li>
+          <li>Reach Rank 5 in Job/Work</li>
+          <li>Earn positive capital reputation</li>
+          <li>Gain one respected NPC reference</li>
+          <li>Complete a Recognition Quest</li>
+        </ul>
+      </div>
+
+      <div class="quest-card">
+        <h3>First Objective</h3>
+        <p>
+          Complete your origin questline and prove that your name deserves to be recorded.
+        </p>
+      </div>
+    </section>
+
+    <aside class="panel side-panel">
+      <h2>World Status</h2>
+
+      <div class="project-card">
+        <h3>Capital Development</h3>
+        <p>The old world stands complete, but the player-built world has not yet begun.</p>
+      </div>
+
+      <div class="request-card">
+        <h3>Town Requests</h3>
+        <p>No guild requests accepted yet.</p>
+      </div>
+
+      <button id="resetCharacterBtn">Delete Character</button>
+    </aside>
+  </main>
+
+  <script src="js/home.js"></script>
+</body>
+</html>
