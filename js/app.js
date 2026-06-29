@@ -2,7 +2,7 @@ let currentStep = 0;
 
 const character = {
   name: "",
-  lineage: "Caucasian / European",
+  lineage: "",
   ethnicity: "",
   gender: "",
   origin: ""
@@ -34,50 +34,172 @@ const storySlides = [
     `
   },
   {
-    title: "The Caucasian / European Lowborn",
+    title: "The Lowborn Record",
     html: `
       <p>
-        In the western kingdoms, stone castles rise above muddy villages, church bells echo over fields,
-        and guild halls decide who may work, trade, learn, and rise.
+        In this world, the old nations, temples, trade roads, and noble houses were built before you were born.
+        You are not a lord. You are not a citizen. You are not a hero.
       </p>
       <p>
-        You were born among farm roads, chapel steps, militia posts, market alleys, and the shadow of noble houses.
-        You are not a knight. You are not a lord. You are not even a citizen worth naming.
-      </p>
-      <p>
-        But the old world is cracking, and even a lowborn may find a path through labor, reputation,
-        education, and sacrifice.
+        You are lowborn. Your lineage may shape where your story begins, but your deeds will decide
+        whether the world remembers your name.
       </p>
     `
   }
 ];
 
-const ethnicityOptions = [
+const lineageOptions = [
   {
-    name: "Russian",
-    description: "Born near frozen marches, old forts, harsh winters, and iron discipline."
+    name: "Caucasian / European",
+    description: "Born beneath castles, churches, guild halls, frontier villages, merchant roads, and noble estates.",
+    status: "available"
   },
   {
-    name: "European",
-    description: "Born among old kingdoms, trade roads, guild halls, and noble estates."
+    name: "Asian",
+    description: "Born near imperial cities, shrine roads, monasteries, trade ports, disciplined schools, and old dynasties.",
+    status: "comingSoon"
   },
   {
-    name: "American",
-    description: "Born from frontier settlements, mixed trades, survival labor, and restless ambition."
+    name: "African",
+    description: "Born among ancient tribal kingdoms, savanna routes, river settlements, spirit lands, and desert empires.",
+    status: "comingSoon"
   },
   {
-    name: "Netherlandic",
-    description: "Born near canals, merchants, shipyards, and disciplined trade houses."
+    name: "Hispanic / South American",
+    description: "Born near jungle cities, river villages, coastal routes, old ruins, stone districts, and sacred lands.",
+    status: "comingSoon"
   },
   {
-    name: "Polish",
-    description: "Born among borderlands, horse roads, village militias, and stubborn survival."
-  },
-  {
-    name: "Germanic",
-    description: "Born around workshops, fortress towns, blacksmiths, engineers, and military order."
+    name: "Indian / Indic",
+    description: "Born near temple cities, sacred markets, river capitals, mystic academies, and scholarly houses.",
+    status: "comingSoon"
   }
 ];
+
+const ethnicityOptionsByLineage = {
+  "Caucasian / European": [
+    {
+      name: "Russian",
+      description: "Born near frozen marches, old forts, harsh winters, and iron discipline."
+    },
+    {
+      name: "European",
+      description: "Born among old kingdoms, trade roads, guild halls, and noble estates."
+    },
+    {
+      name: "American",
+      description: "Born from frontier settlements, mixed trades, survival labor, and restless ambition."
+    },
+    {
+      name: "Netherlandic",
+      description: "Born near canals, merchants, shipyards, and disciplined trade houses."
+    },
+    {
+      name: "Polish",
+      description: "Born among borderlands, horse roads, village militias, and stubborn survival."
+    },
+    {
+      name: "Germanic",
+      description: "Born around workshops, fortress towns, blacksmiths, engineers, and military order."
+    }
+  ],
+
+  "Asian": [
+    {
+      name: "Japanese",
+      description: "Born near shrine paths, disciplined houses, sword schools, and island trade ports."
+    },
+    {
+      name: "Korean",
+      description: "Born among mountain roads, scholarly courts, fortified towns, and old clan traditions."
+    },
+    {
+      name: "Chinese",
+      description: "Born near imperial archives, river cities, old dynasties, engineering halls, and walled capitals."
+    },
+    {
+      name: "Hawaiian",
+      description: "Born among island settlements, ocean routes, ancestral chants, and sacred volcanic lands."
+    },
+    {
+      name: "Malaysian",
+      description: "Born near jungle ports, spice routes, coastal kingdoms, and merchant waters."
+    },
+    {
+      name: "Filipino",
+      description: "Born among island villages, trade docks, storm roads, and resilient family settlements."
+    }
+  ],
+
+  "African": [
+    {
+      name: "Savanna Tribal",
+      description: "Born among open plains, hunting paths, shield circles, and ancestral fires."
+    },
+    {
+      name: "Desert Nomad",
+      description: "Born across dunes, caravan trails, oasis towns, and sun-scorched roads."
+    },
+    {
+      name: "River Kingdom",
+      description: "Born beside great rivers, fishing villages, fertile banks, and royal river cities."
+    },
+    {
+      name: "Highland Clan",
+      description: "Born in mountain settlements, stone paths, guarded passes, and warrior kinships."
+    },
+    {
+      name: "Forest Spiritborn",
+      description: "Born near deep forests, ritual groves, herbal paths, and spirit-touched villages."
+    }
+  ],
+
+  "Hispanic / South American": [
+    {
+      name: "Brazilian",
+      description: "Born near jungle roads, river towns, coastal cities, music, trade, and survival labor."
+    },
+    {
+      name: "Mexican",
+      description: "Born among desert roads, mountain towns, old temples, markets, and frontier settlements."
+    },
+    {
+      name: "Venezuelan",
+      description: "Born near coastal routes, river lands, mountain villages, and trade crossroads."
+    },
+    {
+      name: "Spaniard",
+      description: "Born under old crowns, ports, churches, sword schools, and merchant houses."
+    },
+    {
+      name: "Andean",
+      description: "Born among high mountain settlements, stone roads, old ruins, and harsh climates."
+    }
+  ],
+
+  "Indian / Indic": [
+    {
+      name: "Temple-Born",
+      description: "Born near sacred temples, priestly halls, incense roads, and ritual service."
+    },
+    {
+      name: "River Scholar",
+      description: "Born near river cities, manuscript houses, teachers, and ancient study traditions."
+    },
+    {
+      name: "Desert Trader",
+      description: "Born along dry trade roads, caravan houses, markets, and merchant families."
+    },
+    {
+      name: "Mountain Mystic",
+      description: "Born near high monasteries, hidden paths, meditation halls, and old teachers."
+    },
+    {
+      name: "Artisan Casteborn",
+      description: "Born among craftsmen, metalworkers, weavers, tools, and inherited trade labor."
+    }
+  ]
+};
 
 const genderOptions = [
   {
@@ -150,12 +272,14 @@ function renderStep() {
   } else if (currentStep === 3) {
     renderNameStep();
   } else if (currentStep === 4) {
-    renderEthnicityStep();
+    renderLineageStep();
   } else if (currentStep === 5) {
-    renderGenderStep();
+    renderEthnicityStep();
   } else if (currentStep === 6) {
-    renderOriginStep();
+    renderGenderStep();
   } else if (currentStep === 7) {
+    renderOriginStep();
+  } else if (currentStep === 8) {
     renderSummaryStep();
   }
 }
@@ -172,11 +296,13 @@ function renderStorySlide() {
 
 function renderNameStep() {
   screenTitle.textContent = "Name the Lowborn";
+
   creationForm.innerHTML = `
     <div class="form-group">
       <label for="characterName">Your name is:</label>
       <input id="characterName" type="text" placeholder="Enter your character name" value="${character.name}">
     </div>
+
     <p>
       A name means little in this world until deeds give it weight.
     </p>
@@ -186,10 +312,42 @@ function renderNameStep() {
   nextBtn.textContent = "Next";
 }
 
+function renderLineageStep() {
+  screenTitle.textContent = "Choose Your Lineage";
+
+  creationForm.innerHTML = `
+    <p>
+      Your lineage decides the first civilization, culture, and regional history your lowborn character comes from.
+      It does not decide your final destiny.
+    </p>
+
+    <div class="choice-grid">
+      ${lineageOptions.map(option => `
+        <div class="choice-card ${character.lineage === option.name ? "selected" : ""}" data-choice="${option.name}" data-type="lineage">
+          <h3>${option.name}</h3>
+          <p>${option.description}</p>
+          ${option.status === "comingSoon" ? `<p><strong>Available for planning. Full opening story comes later.</strong></p>` : `<p><strong>Opening path ready.</strong></p>`}
+        </div>
+      `).join("")}
+    </div>
+  `;
+
+  creationForm.classList.remove("hidden");
+  nextBtn.textContent = "Next";
+  attachChoiceListeners();
+}
+
 function renderEthnicityStep() {
   screenTitle.textContent = "Choose Your Ethnicity";
+
+  const ethnicityOptions = ethnicityOptionsByLineage[character.lineage] || [];
+
   creationForm.innerHTML = `
-    <p>Your first lineage path begins within the Caucasian / European world.</p>
+    <p>
+      Your ethnicity gives your character a more specific cultural background inside the broader
+      ${character.lineage} lineage.
+    </p>
+
     <div class="choice-grid">
       ${ethnicityOptions.map(option => `
         <div class="choice-card ${character.ethnicity === option.name ? "selected" : ""}" data-choice="${option.name}" data-type="ethnicity">
@@ -207,8 +365,13 @@ function renderEthnicityStep() {
 
 function renderGenderStep() {
   screenTitle.textContent = "Choose Your Gender";
+
   creationForm.innerHTML = `
-    <p>Your gender shapes certain dialogue, social assumptions, and story flavor, but does not restrict your class path.</p>
+    <p>
+      Your gender shapes certain dialogue, social assumptions, and story flavor,
+      but does not restrict your class path.
+    </p>
+
     <div class="choice-grid">
       ${genderOptions.map(option => `
         <div class="choice-card ${character.gender === option.name ? "selected" : ""}" data-choice="${option.name}" data-type="gender">
@@ -226,8 +389,12 @@ function renderGenderStep() {
 
 function renderOriginStep() {
   screenTitle.textContent = "Choose Your Lowborn Origin";
+
   creationForm.innerHTML = `
-    <p>Your origin decides the hardship that shaped you and the first questline you will walk.</p>
+    <p>
+      Your origin decides the hardship that shaped you and the first questline you will walk.
+    </p>
+
     <div class="choice-grid">
       ${originOptions.map(option => `
         <div class="choice-card ${character.origin === option.name ? "selected" : ""}" data-choice="${option.name}" data-type="origin">
@@ -246,6 +413,7 @@ function renderOriginStep() {
 
 function renderSummaryStep() {
   screenTitle.textContent = "Lowborn Record";
+
   creationForm.innerHTML = `
     <div class="summary-box">
       <p><strong>Name:</strong> ${character.name}</p>
@@ -253,6 +421,7 @@ function renderSummaryStep() {
       <p><strong>Ethnicity:</strong> ${character.ethnicity}</p>
       <p><strong>Gender:</strong> ${character.gender}</p>
       <p><strong>Origin:</strong> ${character.origin}</p>
+
       <p>
         You are not yet a citizen. You are not yet a class. You are merely a lowborn soul
         standing before the first road of survival.
@@ -274,6 +443,10 @@ function attachChoiceListeners() {
 
       character[type] = choice;
 
+      if (type === "lineage") {
+        character.ethnicity = "";
+      }
+
       cards.forEach(c => c.classList.remove("selected"));
       this.classList.add("selected");
     });
@@ -291,17 +464,22 @@ function validateStep() {
     }
   }
 
-  if (currentStep === 4 && character.ethnicity === "") {
+  if (currentStep === 4 && character.lineage === "") {
+    alert("Choose your lineage before continuing.");
+    return false;
+  }
+
+  if (currentStep === 5 && character.ethnicity === "") {
     alert("Choose your ethnicity before continuing.");
     return false;
   }
 
-  if (currentStep === 5 && character.gender === "") {
+  if (currentStep === 6 && character.gender === "") {
     alert("Choose your gender before continuing.");
     return false;
   }
 
-  if (currentStep === 6 && character.origin === "") {
+  if (currentStep === 7 && character.origin === "") {
     alert("Choose your origin before continuing.");
     return false;
   }
@@ -314,11 +492,11 @@ nextBtn.addEventListener("click", function () {
     return;
   }
 
-if (currentStep === 7) {
-  localStorage.setItem("shadowDistrictCharacter", JSON.stringify(character));
-  window.location.href = "home.html";
-  return;
-}
+  if (currentStep === 8) {
+    localStorage.setItem("shadowDistrictCharacter", JSON.stringify(character));
+    window.location.href = "home.html";
+    return;
+  }
 
   currentStep++;
   renderStep();
