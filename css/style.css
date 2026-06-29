@@ -5,161 +5,141 @@
 body {
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
-  background: #0f0d0b;
-  color: #e8dcc8;
+  background:
+    radial-gradient(circle at center, rgba(120, 72, 35, 0.25), transparent 40%),
+    linear-gradient(180deg, #0d0907, #1a100b);
+  color: #eadcc4;
+  min-height: 100vh;
 }
 
-.top-bar {
-  background: linear-gradient(90deg, #211710, #3a2416);
-  border-bottom: 2px solid #7a5530;
-  padding: 20px;
+.creation-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.creation-card {
+  width: 100%;
+  max-width: 900px;
+  min-height: 520px;
+  background: rgba(20, 14, 10, 0.96);
+  border: 1px solid #8a6035;
+  border-radius: 12px;
+  padding: 35px;
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.8);
+}
+
+.creation-card h1 {
+  margin-top: 0;
+  color: #f1c36d;
+  font-size: 2.2rem;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #5c4329;
+  padding-bottom: 14px;
+}
+
+.story-text {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #e6d2b5;
+  min-height: 300px;
+}
+
+.story-text p {
+  margin-bottom: 18px;
+}
+
+.creation-form {
+  min-height: 300px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  color: #f1c36d;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  background: #120e0b;
+  color: #f5e6c8;
+  border: 1px solid #7a5530;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.choice-card {
+  background: #241a13;
+  border: 1px solid #5c4329;
+  padding: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.choice-card:hover {
+  border-color: #f1c36d;
+  background: #302116;
+}
+
+.choice-card.selected {
+  border-color: #f1c36d;
+  background: #3a2617;
+}
+
+.choice-card h3 {
+  margin: 0 0 8px;
+  color: #f1c36d;
+}
+
+.choice-card p {
+  margin: 0;
+  color: #c9b797;
+  font-size: 0.95rem;
+}
+
+.button-row {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
-  align-items: center;
+  margin-top: 25px;
 }
 
-.top-bar h1 {
-  margin: 0;
-  color: #f1c36d;
-  letter-spacing: 2px;
-}
-
-.top-bar p {
-  margin: 5px 0 0;
-  color: #c9b797;
-}
-
-nav button,
 button {
   background: #5a351e;
   color: #f5e6c8;
   border: 1px solid #b88746;
-  padding: 10px 14px;
-  margin: 4px;
+  padding: 12px 20px;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 5px;
+  font-size: 1rem;
 }
 
-nav button:hover,
 button:hover {
   background: #7a4727;
 }
 
-.game-layout {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr;
-  gap: 20px;
-  padding: 20px;
-}
-
-.panel {
-  background: #1a1511;
-  border: 1px solid #5c4329;
-  border-radius: 8px;
-  padding: 18px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
-}
-
-.panel h2 {
-  color: #f1c36d;
-  border-bottom: 1px solid #5c4329;
-  padding-bottom: 8px;
-  margin-top: 0;
-}
-
-.character-name {
-  background: #241a13;
-  padding: 12px;
-  border-left: 4px solid #b88746;
-  margin-bottom: 15px;
-}
-
-.character-name h3 {
-  margin: 0;
-  color: #ffffff;
-}
-
-.character-name p {
-  margin: 4px 0 0;
-  color: #b9a98f;
-}
-
-.info-grid,
-.stats-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 6px;
-}
-
-.stats-grid p,
-.info-grid p {
-  background: #241a13;
-  padding: 8px;
-  border-radius: 4px;
-  margin: 0;
-}
-
-.soul-reading {
-  background: #120f0d;
-  border: 1px solid #3e3024;
-  padding: 12px;
-  border-radius: 6px;
-  color: #cbbda7;
-}
-
-.rank-card,
-.quest-card,
-.project-card,
-.request-card {
-  background: #241a13;
-  border: 1px solid #4f3824;
-  padding: 14px;
-  margin-bottom: 15px;
-  border-radius: 6px;
-}
-
-.rank-card h3,
-.quest-card h3,
-.project-card h3,
-.request-card h3 {
-  color: #e6b764;
-  margin-top: 0;
-}
-
-.progress-box {
-  background: #120f0d;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #3a2a1e;
-}
-
-footer {
-  text-align: center;
-  padding: 15px;
-  color: #b9a98f;
-  border-top: 1px solid #3a2a1e;
-}
-
-@media (max-width: 1000px) {
-  .game-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .top-bar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-.game-message {
-  background: #120f0d;
-  border: 1px solid #b88746;
-  color: #f5e6c8;
-  padding: 12px;
-  margin-top: 12px;
-  border-radius: 6px;
-}
-
 .hidden {
   display: none;
+}
+
+.summary-box {
+  background: #120e0b;
+  border: 1px solid #5c4329;
+  padding: 18px;
+  border-radius: 8px;
+  line-height: 1.7;
 }
