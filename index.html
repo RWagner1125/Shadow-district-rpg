@@ -1,38 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ashes & Dust - Character Creation</title>
-  <link rel="stylesheet" href="css/style.css" />
-</head>
 <body class="creation-theme step-0">
+  <!-- =========================
+       FULL PAGE BACKGROUND LAYERS
+       These layers create the dark dragon atmosphere behind the character creation card.
+       ========================= -->
   <div class="bg-dragon-overlay"></div>
   <div class="bg-gold-eyes"></div>
   <div class="bg-vignette"></div>
 
+  <!-- =========================
+       CHARACTER CREATION PAGE
+       This is the main opening screen where slides, forms, and choices appear.
+       ========================= -->
   <main class="creation-page">
     <section class="creation-card">
-      <h1 id="screenTitle">Created from Ashes and Dust</h1>
+      <!-- =========================
+           ORNATE CARD FRAME IMAGE
+           This is the fixed golden dragon card artwork.
+           It stays visible for every character creation slide.
+           File used: creation-card-frame.png
+           ========================= -->
+      <div class="creation-card-frame" aria-hidden="true"></div>
 
-      <div id="storyText" class="story-text">
-        <p>
-          Created from ashes and from dust, a pitiful creature made among the land built by Gods.
-        </p>
-        <p>
-          Your name is nothing yet. Who even cares?
-        </p>
-      </div>
+      <!-- =========================
+           CARD CONTENT LAYER
+           All changing story text, forms, choices, and buttons go inside here.
+           The image frame stays the same; only this content changes.
+           ========================= -->
+      <div class="creation-card-content">
+        <h1 id="screenTitle">Created from Ashes and Dust</h1>
 
-      <div id="creationForm" class="creation-form hidden"></div>
+        <div id="storyText" class="story-text">
+          <p>
+            Created from ashes and from dust, a pitiful creature made among the land built by Gods.
+          </p>
+          <p>
+            Your name is nothing yet. Who even cares?
+          </p>
+        </div>
 
-      <div class="button-row">
-        <button id="backBtn" class="hidden">Back</button>
-        <button id="nextBtn">Next</button>
+        <div id="creationForm" class="creation-form hidden"></div>
+
+        <div class="button-row">
+          <button id="backBtn" class="hidden">Back</button>
+          <button id="nextBtn">Next</button>
+        </div>
       </div>
     </section>
   </main>
 
   <script src="js/app.js"></script>
 </body>
-</html>
