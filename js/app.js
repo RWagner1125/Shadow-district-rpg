@@ -62,7 +62,44 @@ if (existingCharacter) {
 
 let currentStep = 0;
 
+/* ============================================================
+   LIFE / HP FORMULA SYSTEM
+   ============================================================
 
+   Life is this game's HP system.
+
+   Current beginner rule:
+   - Lowborn / Peasant characters use basic life scaling.
+   - Base Life starts at 25.
+   - Each point of Vitality gives +5 Life.
+   - Starting Vitality is 5.
+   - Starting Life is therefore 50.
+
+   Formula:
+   maxLife = baseLife + vitality * vitalityLifeConversion
+
+   Example:
+   baseLife = 25
+   vitality = 5
+   vitalityLifeConversion = 5
+
+   maxLife = 25 + 5 * 5
+   maxLife = 50
+
+   Later, class tiers will change vitalityLifeConversion and hard caps.
+   ============================================================ */
+
+function calculateMaxLife(vitality, vitalityLifeConversion = 5, baseLife = 25, hardCap = 250) {
+  const calculatedLife = baseLife + vitality * vitalityLifeConversion;
+
+  /*
+    Hard cap prevents the character from gaining more Life than
+    their current class tier allows.
+
+    Peasant / Lowborn starting cap is currently set to 250.
+  */
+  return Math.min(calculatedLife, hardCap);
+}
 /* ============================================================
    CHARACTER OBJECT
    This stores the character choices while the player creates them.
@@ -73,22 +110,55 @@ let currentStep = 0;
    shadowDistrictCharacter
    ============================================================ */
 
+/* ============================================================
+   CHARACTER OBJECT
+   This stores the character choices while the player creates them.
+
+   New addition:
+   - The character now receives their first Life pool.
+   - Life is based on Vitality.
+   - Starting Lowborn Life is 50 / 50.
+   ============================================================ */
+
+const startingVitality = 5;
+const startingMaxLife = calculateMaxLife(startingVitality);
+
 const character = {
   name: "",
   lineage: "",
   ethnicity: "",
   gender: "",
   origin: "",
+
+  level: 1,
   title: "Lowborn Commoner",
   capital: "Ashen Crown",
   rolePath: "Undecided",
+  classTier: "Peasant / Lowborn",
 
   stats: {
     strength: 5,
-    vitality: 5,
+    vitality: startingVitality,
     intelligence: 5,
     wisdom: 5,
     dexterity: 5
+  },
+
+  resources: {
+    maxLife: startingMaxLife,
+    currentLife: startingMaxLife,
+
+    maxStamina: 100,
+    currentStamina: 100,
+
+    maxMana: 0,
+    currentMana: 0
+  },
+
+  statConversions: {
+    vitalityLifeConversion: 5,
+    vitalityHardCap: 250,
+    strengthAttackConversion: 0.10
   },
 
   hiddenStats: {
