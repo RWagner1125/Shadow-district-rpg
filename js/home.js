@@ -1,8 +1,26 @@
-const savedCharacter = JSON.parse(localStorage.getItem("shadowDistrictCharacter"));
+const savedCharacterRaw = localStorage.getItem("shadowDistrictCharacter");
 
-if (!savedCharacter) {
+if (!savedCharacterRaw) {
   window.location.href = "index.html";
 }
+
+const savedCharacter = JSON.parse(savedCharacterRaw);
+
+function setText(id, value) {
+  const element = document.getElementById(id);
+
+  if (element) {
+    element.textContent = value;
+  }
+}
+
+setText("homeName", savedCharacter.name || "Unnamed Lowborn");
+setText("homeTitle", "Lowborn Commoner");
+setText("homeLineage", savedCharacter.lineage || "Unknown");
+setText("homeEthnicity", savedCharacter.ethnicity || "Unknown");
+setText("homeGender", savedCharacter.gender || "Unknown");
+setText("homeOrigin", savedCharacter.origin || "Unknown");
+setText("homeCapital", savedCharacter.capital || "Ashen Crown");
 
 const baseStats = {
   strength: 5,
@@ -12,21 +30,15 @@ const baseStats = {
   dexterity: 5
 };
 
-document.getElementById("homeName").textContent = savedCharacter.name;
-document.getElementById("homeTitle").textContent = "Lowborn Commoner";
-document.getElementById("homeLineage").textContent = savedCharacter.lineage;
-document.getElementById("homeEthnicity").textContent = savedCharacter.ethnicity;
-document.getElementById("homeGender").textContent = savedCharacter.gender;
-document.getElementById("homeOrigin").textContent = savedCharacter.origin;
+setText("homeStrength", baseStats.strength);
+setText("homeVitality", baseStats.vitality);
+setText("homeIntelligence", baseStats.intelligence);
+setText("homeWisdom", baseStats.wisdom);
+setText("homeDexterity", baseStats.dexterity);
 
-document.getElementById("homeStrength").textContent = baseStats.strength;
-document.getElementById("homeVitality").textContent = baseStats.vitality;
-document.getElementById("homeIntelligence").textContent = baseStats.intelligence;
-document.getElementById("homeWisdom").textContent = baseStats.wisdom;
-document.getElementById("homeDexterity").textContent = baseStats.dexterity;
+const welcomeText = document.getElementById("welcomeText");
 
-document.getElementById("welcomeText").textContent =
-  `${savedCharacter.name}, you are a ${savedCharacter.ethnicity} ${savedCharacter.gender} born as a ${savedCharacter.origin}. Your name has entered the lowborn record, but the world still does not care.`;
-
-
-});
+if (welcomeText) {
+  welcomeText.textContent =
+    `${savedCharacter.name}, you are a ${savedCharacter.ethnicity} ${savedCharacter.gender} born from the ${savedCharacter.lineage} lineage as a ${savedCharacter.origin}. Your name has entered the lowborn record, but the world still does not care.`;
+}
