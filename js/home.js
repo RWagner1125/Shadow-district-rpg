@@ -28,7 +28,5 @@ document.getElementById("homeDexterity").textContent = baseStats.dexterity;
 document.getElementById("welcomeText").textContent =
   `${savedCharacter.name}, you are a ${savedCharacter.ethnicity} ${savedCharacter.gender} born as a ${savedCharacter.origin}. Your name has entered the lowborn record, but the world still does not care.`;
 
-document.getElementById("resetCharacterBtn").addEventListener("click", function () {
-  localStorage.removeItem("shadowDistrictCharacter");
-  window.location.href = "index.html";
+
 });
