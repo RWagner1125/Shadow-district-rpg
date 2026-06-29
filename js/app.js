@@ -423,20 +423,20 @@ const nextBtn = document.getElementById("nextBtn");
 const backBtn = document.getElementById("backBtn");
 
 
+
+
 /* ============================================================
    CREATION THEME UPDATE
-   This controls the body class for visual mood progression.
+   This controls the body class for visual mood progression
+   and layout changes.
 
-   CSS expects:
-   creation-theme step-0
-   creation-theme step-1
-   creation-theme step-2
-   etc.
+   Why this matters:
+   Different creation screens need different card shapes.
 
-   This affects:
-   - dragon background intensity
-   - golden atmosphere glow
-   - slide mood styling
+   Step 4 = Lineage selection, needs 5 horizontal cards
+   Step 5 = Ethnicity selection, needs 3 by 2 layout
+   Step 7 = Origin selection, needs 4 by 2 layout
+   Step 8 = Lowborn Record, needs centered summary layout
    ============================================================ */
 
 function updateCreationTheme() {
