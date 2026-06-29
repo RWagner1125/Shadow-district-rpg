@@ -137,11 +137,11 @@ function showQuestDetails(quest, status) {
 
     <p><strong>Reward:</strong> ${quest.reward}</p>
 
-    ${
-      status === "Active"
-        ? `<button onclick="completeQuest('${quest.id}')">Mark Quest Completed</button>`
-        : `<p><strong>Completion Record:</strong> ${quest.completedAt || "Completed"}</p>`
-    }
+${
+  status === "Active"
+    ? `<p><strong>Completion:</strong> This quest will complete automatically when the required objective is finished.</p>`
+    : `<p><strong>Completion Record:</strong> ${quest.completedAt || "Completed"}</p>`
+}
   `;
 }
 
