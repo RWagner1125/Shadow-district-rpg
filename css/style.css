@@ -1,0 +1,153 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  background: #0f0d0b;
+  color: #e8dcc8;
+}
+
+.top-bar {
+  background: linear-gradient(90deg, #211710, #3a2416);
+  border-bottom: 2px solid #7a5530;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+}
+
+.top-bar h1 {
+  margin: 0;
+  color: #f1c36d;
+  letter-spacing: 2px;
+}
+
+.top-bar p {
+  margin: 5px 0 0;
+  color: #c9b797;
+}
+
+nav button,
+button {
+  background: #5a351e;
+  color: #f5e6c8;
+  border: 1px solid #b88746;
+  padding: 10px 14px;
+  margin: 4px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+nav button:hover,
+button:hover {
+  background: #7a4727;
+}
+
+.game-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.panel {
+  background: #1a1511;
+  border: 1px solid #5c4329;
+  border-radius: 8px;
+  padding: 18px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+}
+
+.panel h2 {
+  color: #f1c36d;
+  border-bottom: 1px solid #5c4329;
+  padding-bottom: 8px;
+  margin-top: 0;
+}
+
+.character-name {
+  background: #241a13;
+  padding: 12px;
+  border-left: 4px solid #b88746;
+  margin-bottom: 15px;
+}
+
+.character-name h3 {
+  margin: 0;
+  color: #ffffff;
+}
+
+.character-name p {
+  margin: 4px 0 0;
+  color: #b9a98f;
+}
+
+.info-grid,
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+
+.stats-grid p,
+.info-grid p {
+  background: #241a13;
+  padding: 8px;
+  border-radius: 4px;
+  margin: 0;
+}
+
+.soul-reading {
+  background: #120f0d;
+  border: 1px solid #3e3024;
+  padding: 12px;
+  border-radius: 6px;
+  color: #cbbda7;
+}
+
+.rank-card,
+.quest-card,
+.project-card,
+.request-card {
+  background: #241a13;
+  border: 1px solid #4f3824;
+  padding: 14px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+}
+
+.rank-card h3,
+.quest-card h3,
+.project-card h3,
+.request-card h3 {
+  color: #e6b764;
+  margin-top: 0;
+}
+
+.progress-box {
+  background: #120f0d;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #3a2a1e;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  color: #b9a98f;
+  border-top: 1px solid #3a2a1e;
+}
+
+@media (max-width: 1000px) {
+  .game-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
