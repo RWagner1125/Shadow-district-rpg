@@ -1,3 +1,8 @@
+const existingCharacter = localStorage.getItem("shadowDistrictCharacter");
+
+if (existingCharacter) {
+  window.location.href = "home.html";
+}
 let currentStep = 0;
 
 const character = {
