@@ -1,6 +1,32 @@
-/* =========================
-   GLOBAL RESET
-   ========================= */
+/* ============================================================
+   SHADOW DISTRICT RPG - MAIN STYLE SHEET
+   ============================================================
+
+   IMPORTANT IMAGE FILES USED BY CHARACTER CREATION:
+
+   1. dragon-background-wide.png
+      - Goes in the ROOT of the project
+      - Used as the full-page background for character creation
+
+   2. creation-card-frame.png
+      - Goes in the ROOT of the project
+      - Used as the ornate golden dragon character creation card
+
+   Folder path reminder:
+   style.css is inside the css folder.
+   That is why image paths use ../ to move up to the root folder.
+
+   Example:
+   css/style.css
+   ../dragon-background-wide.png
+
+   ============================================================ */
+
+
+/* ============================================================
+   GLOBAL RESET / BASE STYLES
+   These affect every page: index, home, journal, settings, etc.
+   ============================================================ */
 
 * {
   box-sizing: border-box;
@@ -28,9 +54,12 @@ select {
   display: none;
 }
 
-/* =========================
-   CHARACTER CREATION THEME
-   ========================= */
+
+/* ============================================================
+   CHARACTER CREATION PAGE THEME
+   This section controls index.html only when body has:
+   class="creation-theme step-0"
+   ============================================================ */
 
 .creation-theme {
   min-height: 100vh;
@@ -41,23 +70,43 @@ select {
     linear-gradient(180deg, #020101 0%, #090402 45%, #120704 100%);
 }
 
-/* Dragon background image layer */
+
+/* ============================================================
+   PAGE DRAGON BACKGROUND
+   This controls the full-screen dragon artwork behind the card.
+
+   File used:
+   dragon-background-wide.png
+
+   File location:
+   ROOT of the project
+
+   CSS path:
+   ../dragon-background-wide.png
+   ============================================================ */
+
 .bg-dragon-overlay {
   position: fixed;
   inset: 0;
   z-index: 0;
   background:
     linear-gradient(
-      rgba(0, 0, 0, 0.26),
-      rgba(0, 0, 0, 0.58)
+      rgba(0, 0, 0, 0.28),
+      rgba(0, 0, 0, 0.62)
     ),
-    url("../dragon-bg.png") center center / cover no-repeat;
-  opacity: 0.92;
-  filter: brightness(0.72) contrast(1.18) saturate(1.05);
+    url("../dragon-background-wide.png") center center / cover no-repeat;
+  opacity: 0.96;
+  filter: brightness(0.7) contrast(1.18) saturate(1.06);
   transition: opacity 0.8s ease, filter 0.8s ease, transform 0.8s ease;
 }
 
-/* Extra golden glow reflected toward the page */
+
+/* ============================================================
+   GOLDEN ATMOSPHERE GLOW
+   This adds warm golden light over the dragon background.
+   It is not an image. It is pure CSS lighting.
+   ============================================================ */
+
 .bg-gold-eyes {
   position: fixed;
   inset: 0;
@@ -71,16 +120,27 @@ select {
   animation: goldenBreath 4.5s ease-in-out infinite;
 }
 
-/* Center darkness so text/card remains readable */
+
+/* ============================================================
+   DARK VIGNETTE
+   This darkens the screen edges so the card stays readable.
+   ============================================================ */
+
 .bg-vignette {
   position: fixed;
   inset: 0;
   z-index: 2;
   pointer-events: none;
   background:
-    radial-gradient(circle at center, rgba(0, 0, 0, 0.24) 0%, rgba(0, 0, 0, 0.38) 34%, rgba(0, 0, 0, 0.66) 72%, rgba(0, 0, 0, 0.92) 100%),
+    radial-gradient(circle at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.38) 34%, rgba(0, 0, 0, 0.66) 72%, rgba(0, 0, 0, 0.92) 100%),
     linear-gradient(90deg, rgba(0, 0, 0, 0.35), transparent 24%, transparent 76%, rgba(0, 0, 0, 0.35));
 }
+
+
+/* ============================================================
+   GOLDEN BREATH ANIMATION
+   This makes the golden glow subtly pulse.
+   ============================================================ */
 
 @keyframes goldenBreath {
   0%,
@@ -93,7 +153,12 @@ select {
   }
 }
 
-/* Main creation page layout */
+
+/* ============================================================
+   CHARACTER CREATION MAIN PAGE LAYOUT
+   This centers the ornate card on the screen.
+   ============================================================ */
+
 .creation-page {
   min-height: 100vh;
   display: flex;
@@ -104,47 +169,145 @@ select {
   z-index: 5;
 }
 
+
+/* ============================================================
+   CREATION CARD WRAPPER
+   This is no longer a plain colored box.
+
+   It now holds:
+   1. creation-card-frame.png as the visual frame
+   2. live HTML text/forms/buttons on top of the frame
+
+   The frame does not change between slides.
+   Only the content changes.
+   ============================================================ */
+
 .creation-card {
   width: 100%;
-  max-width: 920px;
-  min-height: 540px;
-  padding: 34px;
-  border-radius: 18px;
-  background:
-    linear-gradient(180deg, rgba(17, 8, 4, 0.86), rgba(7, 3, 2, 0.92));
-  border: 1px solid rgba(255, 185, 70, 0.45);
-  box-shadow:
-    0 0 14px rgba(255, 176, 61, 0.18),
-    0 0 38px rgba(255, 138, 32, 0.14),
-    0 0 80px rgba(0, 0, 0, 0.82),
-    inset 0 0 18px rgba(255, 198, 100, 0.06);
-  backdrop-filter: blur(5px);
+  max-width: 1100px;
+  min-height: 720px;
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
 }
 
-.creation-card h1 {
+
+/* ============================================================
+   ORNATE CARD FRAME IMAGE
+   This displays the exact golden dragon card frame.
+
+   File used:
+   creation-card-frame.png
+
+   File location:
+   ROOT of the project
+
+   CSS path:
+   ../creation-card-frame.png
+
+   Important:
+   This is only visual. It does not block clicks.
+   ============================================================ */
+
+.creation-card-frame {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: url("../creation-card-frame.png") center center / contain no-repeat;
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   CARD CONTENT AREA
+   This is the safe text/form/button zone inside the ornate card.
+
+   Adjust this section if:
+   - text is too high
+   - text is too low
+   - text is too far left
+   - text is too far right
+   - buttons are too close to the tail
+   ============================================================ */
+
+.creation-card-content {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 780px;
+  min-height: 720px;
+
+  /* Text placement inside the card frame */
+  padding-top: 135px;
+  padding-right: 95px;
+  padding-bottom: 120px;
+  padding-left: 95px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+
+/* ============================================================
+   CREATION TITLE
+   This is the changing title inside the ornate card.
+
+   Examples:
+   Created from Ashes and Dust
+   Born Beneath Foreign Banners
+   Choose Your Lineage
+   ============================================================ */
+
+.creation-card-content h1 {
   margin-top: 0;
   margin-bottom: 18px;
   padding-bottom: 12px;
-  font-size: 2.2rem;
-  color: #ffcc74;
-  border-bottom: 1px solid rgba(255, 174, 70, 0.32);
+  font-size: 2.15rem;
+  color: #ffcf78;
+  border-bottom: 1px solid rgba(255, 186, 86, 0.3);
   text-shadow:
     0 0 8px rgba(255, 191, 90, 0.34),
     0 0 22px rgba(255, 145, 36, 0.18);
   letter-spacing: 1px;
 }
 
+
+/* ============================================================
+   CARD TEXT / FORM AREA
+   This controls the main content body inside the ornate card.
+
+   This affects:
+   - story slide paragraphs
+   - name input
+   - lineage cards
+   - ethnicity cards
+   - gender cards
+   - origin cards
+   - final summary box
+   ============================================================ */
+
 .story-text,
 .creation-form {
-  min-height: 300px;
+  min-height: 320px;
   color: #f3dfbb;
-  line-height: 1.85;
+  line-height: 1.9;
   font-size: 1.08rem;
+  padding-top: 12px;
+  padding-bottom: 24px;
+  flex: 1;
 }
 
 .story-text p {
   margin-bottom: 18px;
 }
+
+
+/* ============================================================
+   FORM GROUPS
+   Used for name input and future creation form fields.
+   ============================================================ */
 
 .form-group {
   margin-bottom: 18px;
@@ -156,6 +319,12 @@ select {
   color: #ffcc74;
   font-weight: bold;
 }
+
+
+/* ============================================================
+   INPUTS / SELECT BOXES
+   Used for character name and future dropdowns.
+   ============================================================ */
 
 input,
 select {
@@ -177,11 +346,23 @@ select:focus {
     0 0 24px rgba(255, 140, 40, 0.12);
 }
 
+
+/* ============================================================
+   CHOICE CARD GRID
+   Used for lineage, ethnicity, gender, and origin choices.
+   ============================================================ */
+
 .choice-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 14px;
 }
+
+
+/* ============================================================
+   CHOICE CARDS
+   Individual clickable selection boxes.
+   ============================================================ */
 
 .choice-card {
   background: rgba(22, 11, 6, 0.9);
@@ -221,6 +402,12 @@ select:focus {
   font-size: 0.95rem;
 }
 
+
+/* ============================================================
+   SUMMARY BOX
+   Final character creation confirmation screen.
+   ============================================================ */
+
 .summary-box {
   background: rgba(10, 5, 3, 0.88);
   border: 1px solid rgba(255, 170, 65, 0.28);
@@ -229,11 +416,26 @@ select:focus {
   line-height: 1.8;
 }
 
+
+/* ============================================================
+   BUTTON ROW
+   Controls Back and Next/Create Character buttons
+   inside the ornate character creation card.
+   ============================================================ */
+
 .button-row {
   display: flex;
   justify-content: space-between;
-  margin-top: 28px;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 10px;
 }
+
+
+/* ============================================================
+   GLOBAL BUTTON STYLE
+   Used by character creation buttons and most game UI buttons.
+   ============================================================ */
 
 button {
   background: linear-gradient(180deg, #8c5425, #643614);
@@ -262,9 +464,19 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* =========================
+
+/* ============================================================
    CHARACTER CREATION SLIDE MOODS
-   ========================= */
+   These classes are controlled by app.js.
+
+   app.js changes body class to:
+   creation-theme step-0
+   creation-theme step-1
+   creation-theme step-2
+   etc.
+
+   This lets the background slowly intensify as players progress.
+   ============================================================ */
 
 .creation-theme.step-0 .bg-dragon-overlay {
   opacity: 0.82;
@@ -304,9 +516,11 @@ button:disabled {
   opacity: 1;
 }
 
-/* =========================
+
+/* ============================================================
    HOME / MAIN GAME PAGES
-   ========================= */
+   This section controls home.html and general dashboard layout.
+   ============================================================ */
 
 .top-bar {
   background: linear-gradient(90deg, #211710, #3a2416);
@@ -339,12 +553,27 @@ nav button {
   border-radius: 4px;
 }
 
+
+/* ============================================================
+   MAIN GAME DASHBOARD LAYOUT
+   Used on home.html.
+   Left panel: character
+   Center panel: main content
+   Right panel: town/world status
+   ============================================================ */
+
 .game-layout {
   display: grid;
   grid-template-columns: 1fr 1.5fr 1fr;
   gap: 20px;
   padding: 20px;
 }
+
+
+/* ============================================================
+   BASIC PANEL STYLE
+   Used by home, journal, and settings pages.
+   ============================================================ */
 
 .panel {
   background: #1a1511;
@@ -360,6 +589,12 @@ nav button {
   padding-bottom: 8px;
   margin-top: 0;
 }
+
+
+/* ============================================================
+   CHARACTER PANEL
+   Used on the home page for character record display.
+   ============================================================ */
 
 .character-name {
   background: #241a13;
@@ -393,6 +628,12 @@ nav button {
   margin: 0;
 }
 
+
+/* ============================================================
+   STANDARD GAME CARDS
+   Used for rank cards, quest cards, project cards, and request cards.
+   ============================================================ */
+
 .rank-card,
 .quest-card,
 .project-card,
@@ -412,9 +653,11 @@ nav button {
   margin-top: 0;
 }
 
-/* =========================
+
+/* ============================================================
    JOURNAL PAGE
-   ========================= */
+   This section controls journal.html.
+   ============================================================ */
 
 .journal-layout {
   display: grid;
@@ -500,9 +743,11 @@ nav button {
   border-radius: 4px;
 }
 
-/* =========================
+
+/* ============================================================
    SETTINGS PAGE
-   ========================= */
+   This section controls settings.html.
+   ============================================================ */
 
 .danger-card {
   background: #241111;
@@ -535,9 +780,11 @@ nav button {
   border-color: #5a3333;
 }
 
-/* =========================
+
+/* ============================================================
    GENERAL GAME MESSAGE
-   ========================= */
+   Used for warnings, confirmations, and system messages.
+   ============================================================ */
 
 .game-message {
   background: #120f0d;
@@ -548,9 +795,11 @@ nav button {
   border-radius: 6px;
 }
 
-/* =========================
+
+/* ============================================================
    RESPONSIVE DESIGN
-   ========================= */
+   This section makes pages work better on smaller screens.
+   ============================================================ */
 
 @media (max-width: 1000px) {
   .game-layout,
@@ -568,12 +817,23 @@ nav button {
   }
 
   .creation-card {
-    padding: 24px;
-    min-height: auto;
+    max-width: 100%;
+    min-height: 680px;
   }
 
-  .creation-card h1 {
-    font-size: 1.7rem;
+  .creation-card-content {
+    max-width: 700px;
+    min-height: 680px;
+
+    /* Smaller screen safe-area adjustment */
+    padding-top: 125px;
+    padding-right: 80px;
+    padding-bottom: 110px;
+    padding-left: 80px;
+  }
+
+  .creation-card-content h1 {
+    font-size: 1.75rem;
   }
 
   .choice-grid {
@@ -582,5 +842,36 @@ nav button {
 
   .bg-dragon-overlay {
     background-position: center center;
+  }
+}
+
+@media (max-width: 700px) {
+  .creation-card {
+    min-height: 650px;
+  }
+
+  .creation-card-content {
+    min-height: 650px;
+
+    /* Phone-sized safe-area adjustment */
+    padding-top: 115px;
+    padding-right: 55px;
+    padding-bottom: 95px;
+    padding-left: 55px;
+  }
+
+  .creation-card-content h1 {
+    font-size: 1.45rem;
+  }
+
+  .story-text,
+  .creation-form {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  button {
+    padding: 10px 18px;
+    font-size: 0.9rem;
   }
 }
