@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- =========================
+       BASIC PAGE SETUP
+       ========================= -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Ashes & Dust - Character Sheet</title>
+
+  <!-- =========================
+       MAIN STYLESHEET
+       ========================= -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <!-- =========================
+       TOP NAVIGATION
+       ========================= -->
+  <header class="top-bar">
+    <div>
+      <h1>Character Sheet</h1>
+      <p>Your body, your class authority, and your current stat conversions.</p>
+    </div>
+
+    <nav>
+      <button onclick="window.location.href='home.html'">Home</button>
+      <button onclick="window.location.href='character.html'">Character</button>
+      <button onclick="window.location.href='journal.html'">Journal</button>
+      <button onclick="window.location.href='settings.html'">Settings</button>
+    </nav>
+  </header>
+
+  <!-- =========================
+       CHARACTER SHEET LAYOUT
+       ========================= -->
+  <main class="character-sheet-layout">
+
+    <!-- =========================
+         LEFT PANEL: IDENTITY
+         ========================= -->
+    <section class="panel">
+      <h2>Character Record</h2>
+
+      <div class="character-name">
+        <h3 id="sheetName">Unnamed Lowborn</h3>
+        <p id="sheetTitle">Lowborn Commoner</p>
+      </div>
+
+      <div class="info-grid">
+        <p><strong>Level:</strong> <span id="sheetLevel">1</span></p>
+        <p><strong>EXP:</strong> <span id="sheetExperience">0 / 150</span></p>
+        <p><strong>Unspent Stat Points:</strong> <span id="sheetUnspentStatPoints">0</span></p>
+        <p><strong>Class Tier:</strong> <span id="sheetClassTier">Peasant / Lowborn</span></p>
+        <p><strong>Role:</strong> <span id="sheetRole">tank</span></p>
+        <p><strong>Lineage:</strong> <span id="sheetLineage">Unknown</span></p>
+        <p><strong>Ethnicity:</strong> <span id="sheetEthnicity">Unknown</span></p>
+        <p><strong>Gender:</strong> <span id="sheetGender">Unknown</span></p>
+        <p><strong>Origin:</strong> <span id="sheetOrigin">Unknown</span></p>
+        <p><strong>Capital:</strong> <span id="sheetCapital">Ashen Crown</span></p>
+      </div>
+    </section>
+
+    <!-- =========================
+         CENTER PANEL: RESOURCES AND STATS
+         ========================= -->
+    <section class="panel">
+      <h2>Life, Mana, and Main Stats</h2>
+
+      <div class="resource-card">
+        <h3>Life</h3>
+        <p><strong>Current Life:</strong> <span id="sheetLife">0 / 0</span></p>
+        <p><strong>Current HP Cap:</strong> <span id="sheetHpCap">0</span></p>
+        <p><strong>Locked Life Potential:</strong> <span id="sheetLockedLife">0</span></p>
+      </div>
+
+      <div class="resource-card">
+        <h3>Stamina</h3>
+        <p><strong>Current Stamina:</strong> <span id="sheetStamina">0 / 0</span></p>
+      </div>
+
+      <div class="resource-card">
+        <h3>Mana / Spiritual Essence</h3>
+        <p><strong>Current Mana:</strong> <span id="sheetMana">0 / 0</span></p>
+        <p><strong>Mana Cap:</strong> <span id="sheetManaCap">0</span></p>
+        <p><strong>Passive Mana From Level:</strong> <span id="sheetPassiveMana">0</span></p>
+        <p><strong>Wisdom Mana Bonus:</strong> <span id="sheetWisdomMana">0</span></p>
+      </div>
+
+      <h3>Visible Stats</h3>
+
+      <div class="stats-grid">
+        <p>Strength: <span id="sheetStrength">5</span></p>
+        <p>Vitality: <span id="sheetVitality">5</span></p>
+        <p>Intelligence: <span id="sheetIntelligence">5</span></p>
+        <p>Wisdom: <span id="sheetWisdom">5</span></p>
+        <p>Dexterity: <span id="sheetDexterity">5</span></p>
+      </div>
+    </section>
+
+    <!-- =========================
+         RIGHT PANEL: CONVERSIONS
+         ========================= -->
+    <aside class="panel">
+      <h2>Stat Conversions</h2>
+
+      <div class="resource-card">
+        <h3>Strength</h3>
+        <p><strong>Physical Attack Conversion:</strong> <span id="sheetStrengthConversion">0</span></p>
+        <p><strong>Physical Attack From Strength:</strong> <span id="sheetStrengthAttack">0</span></p>
+      </div>
+
+      <div class="resource-card">
+        <h3>Intelligence</h3>
+        <p><strong>Magic Attack Conversion:</strong> <span id="sheetMagicConversion">0</span></p>
+        <p><strong>Magic Attack From Intelligence:</strong> <span id="sheetMagicAttack">0</span></p>
+      </div>
+
+      <div class="resource-card">
+        <h3>Dexterity</h3>
+        <p><strong>DEX Attack Conversion:</strong> <span id="sheetDexConversion">0</span></p>
+        <p><strong>DEX Attack Power:</strong> <span id="sheetDexAttack">0</span></p>
+        <p><strong>Accuracy Bonus:</strong> <span id="sheetAccuracy">0%</span></p>
+        <p><strong>Evasion Bonus:</strong> <span id="sheetEvasion">0%</span></p>
+        <p><strong>Critical Bonus:</strong> <span id="sheetCritical">0%</span></p>
+        <p><strong>Movement Bonus:</strong> <span id="sheetMovement">0%</span></p>
+        <p><strong>Flee Bonus:</strong> <span id="sheetFlee">0%</span></p>
+      </div>
+
+      <div class="resource-card">
+        <h3>Wisdom</h3>
+        <p><strong>Prayer Power Conversion:</strong> <span id="sheetPrayerConversion">0</span></p>
+        <p><strong>Prayer Power From Wisdom:</strong> <span id="sheetPrayerPower">0</span></p>
+      </div>
+    </aside>
+  </main>
+
+  <!-- =========================
+       SCRIPT ORDER MATTERS
+       statRules.js must load before character.js
+       ========================= -->
+  <script src="js/statRules.js"></script>
+  <script src="js/character.js"></script>
+</body>
+</html>
