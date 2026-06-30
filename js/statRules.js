@@ -939,8 +939,8 @@ window.AshesDustStats = {
   normalizeRoleKey,
   calculateDamageRange,
   rollDamage,
+  applyWeaknessModifier,
   getExperienceNeededForNextLevel,
-  addExperienceToCharacter,
 
   getHpCap,
   calculateMaxLifeFromVitality,
