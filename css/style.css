@@ -1,31 +1,27 @@
 /* ============================================================
-   SHADOW DISTRICT RPG - MAIN STYLE SHEET
+   ASHES & DUST / SHADOW DISTRICT RPG - MAIN STYLESHEET
    ============================================================
 
-   IMPORTANT IMAGE FILES USED BY CHARACTER CREATION:
-
-   1. dragon-background-wide.png
-      - Goes in the ROOT of the project
-      - Used as the full-page background for character creation
-
-   2. creation-card-frame.png
-      - Goes in the ROOT of the project
-      - Used as the ornate golden dragon character creation card
-
-   Folder path reminder:
-   style.css is inside the css folder.
-   That is why image paths use ../ to move up to the root folder.
-
-   Example:
+   FILE:
    css/style.css
-   ../dragon-background-wide.png
 
+   PURPOSE:
+   Controls the full visual layout for:
+   - character creation
+   - home page
+   - character sheet
+   - journal page
+   - settings page
+   - universal Torn-style side navigation
+   - future combat page
+
+   Theme:
+   Dark fantasy / lowborn RPG interface.
    ============================================================ */
 
 
 /* ============================================================
-   GLOBAL RESET / BASE STYLES
-   These affect every page: index, home, journal, settings, etc.
+   GLOBAL RESET / BASE PAGE
    ============================================================ */
 
 * {
@@ -39,1086 +35,43 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
+  background: #050201;
+  color: #f4e0b8;
   font-family: Georgia, "Times New Roman", serif;
-  color: #f7e8c5;
-  background: #070302;
+  font-size: 16px;
+  line-height: 1.4;
+  padding-left: 220px;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+  color: #ffcc74;
 }
 
 button,
 input,
-select {
+select,
+textarea {
   font-family: inherit;
 }
-
-.hidden {
-  display: none;
-}
-
-
-/* ============================================================
-   CHARACTER CREATION PAGE THEME
-   This section controls index.html only when body has:
-   class="creation-theme step-0"
-   ============================================================ */
-
-.creation-theme {
-  min-height: 100vh;
-  overflow-x: hidden;
-  position: relative;
-  background:
-    radial-gradient(circle at center, rgba(255, 183, 72, 0.08), transparent 32%),
-    linear-gradient(180deg, #020101 0%, #090402 45%, #120704 100%);
-}
-
-
-/* ============================================================
-   PAGE DRAGON BACKGROUND
-   This controls the full-screen dragon artwork behind the card.
-
-   File used:
-   dragon-background-wide.png
-
-   File location:
-   ROOT of the project
-
-   CSS path:
-   ../dragon-background-wide.png
-   ============================================================ */
-
-.bg-dragon-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background:
-    linear-gradient(
-      rgba(0, 0, 0, 0.28),
-      rgba(0, 0, 0, 0.62)
-    ),
-    url("../dragon-background-wide.png") center center / cover no-repeat;
-  opacity: 0.96;
-  filter: brightness(0.7) contrast(1.18) saturate(1.06);
-  transition: opacity 0.8s ease, filter 0.8s ease, transform 0.8s ease;
-}
-
-
-/* ============================================================
-   GOLDEN ATMOSPHERE GLOW
-   This adds warm golden light over the dragon background.
-   It is not an image. It is pure CSS lighting.
-   ============================================================ */
-
-.bg-gold-eyes {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 28% 28%, rgba(255, 206, 80, 0.18), transparent 11%),
-    radial-gradient(circle at 38% 42%, rgba(255, 166, 38, 0.08), transparent 20%),
-    radial-gradient(circle at center, rgba(255, 195, 81, 0.06), transparent 34%);
-  mix-blend-mode: screen;
-  animation: goldenBreath 4.5s ease-in-out infinite;
-}
-
-
-/* ============================================================
-   DARK VIGNETTE
-   This darkens the screen edges so the card stays readable.
-   ============================================================ */
-
-.bg-vignette {
-  position: fixed;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.38) 34%, rgba(0, 0, 0, 0.66) 72%, rgba(0, 0, 0, 0.92) 100%),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.35), transparent 24%, transparent 76%, rgba(0, 0, 0, 0.35));
-}
-
-
-/* ============================================================
-   GOLDEN BREATH ANIMATION
-   This makes the golden glow subtly pulse.
-   ============================================================ */
-
-@keyframes goldenBreath {
-  0%,
-  100% {
-    opacity: 0.58;
-  }
-
-  50% {
-    opacity: 0.95;
-  }
-}
-
-
-/* ============================================================
-   CHARACTER CREATION MAIN PAGE LAYOUT
-   This centers the ornate card on the screen.
-   ============================================================ */
-
-.creation-page {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 42px;
-  position: relative;
-  z-index: 5;
-}
-
-
-/* ============================================================
-   CREATION CARD WRAPPER
-   This is the living card container.
-
-   Important:
-   The card changes size depending on the current character
-   creation step.
-
-   The ornate frame image is attached to this card and stretches
-   with the card shape.
-   ============================================================ */
-
-.creation-card {
-  width: min(92vw, 980px);
-  min-height: 640px;
-  position: relative;
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  transition: width 0.35s ease, min-height 0.35s ease;
-}
-
-
-/* ============================================================
-   ORNATE CARD FRAME IMAGE
-   This attaches the golden dragon frame directly to the card.
-
-   Important change:
-   background-size is now 100% 100%.
-
-   That means the frame stretches with the card when the card
-   becomes wider for lineage, ethnicity, and origin choices.
-   ============================================================ */
-
-.creation-card-frame {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: url("../creation-card-frame.png") center center / 100% 100% no-repeat;
-  pointer-events: none;
-}
-
-
-/* ============================================================
-   CARD CONTENT AREA
-   This is the safe zone where text, choices, forms, and buttons sit.
-
-   This area stays attached to the same card frame.
-   The step-specific CSS below changes its width and spacing.
-   ============================================================ */
-
-.creation-card-content {
-  position: relative;
-  z-index: 5;
-  width: 100%;
-  max-width: 720px;
-  min-height: 640px;
-
-  padding-top: 120px;
-  padding-right: 80px;
-  padding-bottom: 105px;
-  padding-left: 80px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  transition: max-width 0.35s ease, padding 0.35s ease, min-height 0.35s ease;
-}
-
-/* ============================================================
-   CREATION TITLE
-   This is the changing title inside the ornate card.
-
-   Examples:
-   Created from Ashes and Dust
-   Born Beneath Foreign Banners
-   Choose Your Lineage
-   ============================================================ */
-
-.creation-card-content h1 {
-  margin-top: 0;
-  margin-bottom: 18px;
-  padding-bottom: 12px;
-  font-size: 2.15rem;
-  color: #ffcf78;
-  border-bottom: 1px solid rgba(255, 186, 86, 0.3);
-  text-shadow:
-    0 0 8px rgba(255, 191, 90, 0.34),
-    0 0 22px rgba(255, 145, 36, 0.18);
-  letter-spacing: 1px;
-}
-
-
-/* ============================================================
-   CARD TEXT / FORM AREA
-   This controls the main content body inside the ornate card.
-
-   This affects:
-   - story slide paragraphs
-   - name input
-   - lineage cards
-   - ethnicity cards
-   - gender cards
-   - origin cards
-   - final summary box
-   ============================================================ */
-
-.story-text,
-.creation-form {
-  min-height: 320px;
-  color: #f3dfbb;
-  line-height: 1.9;
-  font-size: 1.08rem;
-  padding-top: 12px;
-  padding-bottom: 24px;
-  flex: 1;
-}
-
-.story-text p {
-  margin-bottom: 18px;
-}
-
-
-/* ============================================================
-   FORM GROUPS
-   Used for name input and future creation form fields.
-   ============================================================ */
-
-.form-group {
-  margin-bottom: 18px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  color: #ffcc74;
-  font-weight: bold;
-}
-
-
-/* ============================================================
-   INPUTS / SELECT BOXES
-   Used for character name and future dropdowns.
-   ============================================================ */
-
-input,
-select {
-  width: 100%;
-  padding: 13px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 170, 65, 0.42);
-  background: rgba(10, 5, 3, 0.92);
-  color: #f8e6c1;
-  font-size: 1rem;
-  outline: none;
-}
-
-input:focus,
-select:focus {
-  border-color: #ffcc74;
-  box-shadow:
-    0 0 10px rgba(255, 190, 90, 0.22),
-    0 0 24px rgba(255, 140, 40, 0.12);
-}
-
-
-/* ============================================================
-   DEFAULT CHOICE CARD GRID
-   Used by smaller choice screens unless a step-specific layout
-   overrides it below.
-   ============================================================ */
-
-.choice-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(220px, 1fr));
-  gap: 16px;
-}
-
-
-/* ============================================================
-   CHOICE CARDS
-   Individual selectable cards.
-
-   These are made slightly tighter so horizontal layouts fit
-   inside the ornate frame.
-   ============================================================ */
-
-.choice-card {
-  background: rgba(22, 11, 6, 0.88);
-  border: 1px solid rgba(255, 173, 72, 0.32);
-  padding: 12px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  min-height: 120px;
-}
-
-.choice-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 210, 110, 0.62);
-  box-shadow:
-    0 0 14px rgba(255, 170, 70, 0.16),
-    0 0 30px rgba(255, 120, 30, 0.09);
-  background: rgba(36, 17, 8, 0.96);
-}
-
-.choice-card.selected {
-  border-color: #ffcc74;
-  box-shadow:
-    0 0 12px rgba(255, 190, 90, 0.28),
-    0 0 28px rgba(255, 146, 55, 0.16),
-    inset 0 0 12px rgba(255, 170, 80, 0.05);
-  background: rgba(48, 22, 10, 0.98);
-}
-
-.choice-card h3 {
-  margin: 0 0 8px;
-  color: #ffcc74;
-  font-size: 1.08rem;
-}
-
-.choice-card p {
-  margin: 0 0 7px;
-  color: #e3cfaa;
-  font-size: 0.84rem;
-  line-height: 1.5;
-}
-
-/* ============================================================
-   STEP-SPECIFIC CARD LAYOUTS
-   These make the ornate card resize depending on which
-   character creation screen is active.
-
-   Step map from app.js:
-   step-4 = Lineage selection
-   step-5 = Ethnicity selection
-   step-7 = Origin selection
-   step-8 = Lowborn Record summary
-   ============================================================ */
-
-
-/* =========================
-   STEP 4: LINEAGE SELECTION
-   5 options displayed horizontally in one row.
-   ========================= */
-
-.creation-theme.step-4 .creation-card {
-  width: min(96vw, 1500px);
-  min-height: 620px;
-}
-
-.creation-theme.step-4 .creation-card-content {
-  max-width: 1240px;
-  min-height: 620px;
-  padding-top: 105px;
-  padding-right: 115px;
-  padding-bottom: 105px;
-  padding-left: 115px;
-}
-
-.creation-theme.step-4 .choice-grid {
-  grid-template-columns: repeat(5, minmax(150px, 1fr));
-  gap: 14px;
-}
-
-.creation-theme.step-4 .choice-card {
-  min-height: 185px;
-}
-
-
-/* =========================
-   STEP 5: ETHNICITY SELECTION
-   6 options displayed as 2 rows of 3.
-   ========================= */
-
-.creation-theme.step-5 .creation-card {
-  width: min(96vw, 1300px);
-  min-height: 680px;
-}
-
-.creation-theme.step-5 .creation-card-content {
-  max-width: 980px;
-  min-height: 680px;
-  padding-top: 105px;
-  padding-right: 110px;
-  padding-bottom: 110px;
-  padding-left: 110px;
-}
-
-.creation-theme.step-5 .choice-grid {
-  grid-template-columns: repeat(3, minmax(210px, 1fr));
-  gap: 16px;
-}
-
-.creation-theme.step-5 .choice-card {
-  min-height: 145px;
-}
-
-
-/* =========================
-   STEP 7: ORIGIN SELECTION
-   8 options displayed as 2 rows of 4.
-   ========================= */
-
-.creation-theme.step-7 .creation-card {
-  width: min(98vw, 1500px);
-  min-height: 760px;
-}
-
-.creation-theme.step-7 .creation-card-content {
-  max-width: 1220px;
-  min-height: 760px;
-  padding-top: 95px;
-  padding-right: 115px;
-  padding-bottom: 110px;
-  padding-left: 115px;
-}
-
-.creation-theme.step-7 .choice-grid {
-  grid-template-columns: repeat(4, minmax(210px, 1fr));
-  gap: 14px;
-}
-
-.creation-theme.step-7 .choice-card {
-  min-height: 190px;
-}
-
-
-/* =========================
-   STEP 8: LOWBORN RECORD
-   Summary screen returns to a centered card shape.
-   ========================= */
-
-.creation-theme.step-8 .creation-card {
-  width: min(92vw, 1050px);
-  min-height: 650px;
-}
-
-.creation-theme.step-8 .creation-card-content {
-  max-width: 760px;
-  min-height: 650px;
-  padding-top: 115px;
-  padding-right: 85px;
-  padding-bottom: 105px;
-  padding-left: 85px;
-}
-
-.creation-theme.step-8 .summary-box {
-  max-width: 620px;
-  margin: 0 auto;
-}
-
-/* ============================================================
-   SUMMARY BOX
-   Final character creation confirmation screen.
-   ============================================================ */
-
-.summary-box {
-  background: rgba(10, 5, 3, 0.88);
-  border: 1px solid rgba(255, 170, 65, 0.28);
-  border-radius: 10px;
-  padding: 18px;
-  line-height: 1.8;
-}
-
-
-/* ============================================================
-   BUTTON ROW
-   Controls Back and Next/Create Character buttons
-   inside the ornate character creation card.
-   ============================================================ */
-
-.button-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: auto;
-  padding-top: 10px;
-}
-
-
-/* ============================================================
-   GLOBAL BUTTON STYLE
-   Used by character creation buttons and most game UI buttons.
-   ============================================================ */
 
 button {
-  background: linear-gradient(180deg, #8c5425, #643614);
-  color: #fff0d0;
-  border: 1px solid rgba(255, 195, 90, 0.46);
-  padding: 12px 22px;
-  border-radius: 999px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.22s ease;
-  box-shadow:
-    0 0 10px rgba(255, 150, 55, 0.14),
-    inset 0 0 8px rgba(255, 205, 120, 0.05);
-}
-
-button:hover {
-  transform: translateY(-1px);
-  background: linear-gradient(180deg, #a9652d, #7a4219);
-  box-shadow:
-    0 0 12px rgba(255, 175, 80, 0.24),
-    0 0 28px rgba(255, 130, 40, 0.16);
-}
-
-button:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-
-
-/* ============================================================
-   CHARACTER CREATION SLIDE MOODS
-   These classes are controlled by app.js.
-
-   app.js changes body class to:
-   creation-theme step-0
-   creation-theme step-1
-   creation-theme step-2
-   etc.
-
-   This lets the background slowly intensify as players progress.
-   ============================================================ */
-
-.creation-theme.step-0 .bg-dragon-overlay {
-  opacity: 0.82;
-  filter: brightness(0.58) contrast(1.12) saturate(0.92);
-  transform: scale(1);
-}
-
-.creation-theme.step-1 .bg-dragon-overlay {
-  opacity: 0.88;
-  filter: brightness(0.64) contrast(1.16) saturate(0.98);
-  transform: scale(1.01);
-}
-
-.creation-theme.step-2 .bg-dragon-overlay {
-  opacity: 0.94;
-  filter: brightness(0.7) contrast(1.18) saturate(1.02);
-  transform: scale(1.015);
-}
-
-.creation-theme.step-3 .bg-dragon-overlay,
-.creation-theme.step-4 .bg-dragon-overlay,
-.creation-theme.step-5 .bg-dragon-overlay,
-.creation-theme.step-6 .bg-dragon-overlay,
-.creation-theme.step-7 .bg-dragon-overlay,
-.creation-theme.step-8 .bg-dragon-overlay {
-  opacity: 1;
-  filter: brightness(0.76) contrast(1.22) saturate(1.08);
-  transform: scale(1.02);
-}
-
-.creation-theme.step-3 .bg-gold-eyes,
-.creation-theme.step-4 .bg-gold-eyes,
-.creation-theme.step-5 .bg-gold-eyes,
-.creation-theme.step-6 .bg-gold-eyes,
-.creation-theme.step-7 .bg-gold-eyes,
-.creation-theme.step-8 .bg-gold-eyes {
-  opacity: 1;
-}
-
-
-/* ============================================================
-   HOME / MAIN GAME PAGES
-   This section controls home.html and general dashboard layout.
-   ============================================================ */
-
-.top-bar {
-  background: linear-gradient(90deg, #211710, #3a2416);
-  border-bottom: 2px solid #7a5530;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  align-items: center;
-}
-
-.top-bar h1 {
-  margin: 0;
-  color: #f1c36d;
-  letter-spacing: 2px;
-}
-
-.top-bar p {
-  margin: 5px 0 0;
-  color: #c9b797;
-}
-
-nav button {
-  background: #5a351e;
-  color: #f5e6c8;
-  border: 1px solid #b88746;
-  padding: 10px 14px;
-  margin: 4px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-
-/* ============================================================
-   MAIN GAME DASHBOARD LAYOUT
-   Used on home.html.
-   Left panel: character
-   Center panel: main content
-   Right panel: town/world status
-   ============================================================ */
-
-.game-layout {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr;
-  gap: 20px;
-  padding: 20px;
-}
-
-
-/* ============================================================
-   BASIC PANEL STYLE
-   Used by home, journal, and settings pages.
-   ============================================================ */
-
-.panel {
-  background: #1a1511;
-  border: 1px solid #5c4329;
-  border-radius: 8px;
-  padding: 18px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
-}
-
-.panel h2 {
-  color: #f1c36d;
-  border-bottom: 1px solid #5c4329;
-  padding-bottom: 8px;
-  margin-top: 0;
-}
-
-
-/* ============================================================
-   CHARACTER PANEL
-   Used on the home page for character record display.
-   ============================================================ */
-
-.character-name {
-  background: #241a13;
-  padding: 12px;
-  border-left: 4px solid #b88746;
-  margin-bottom: 15px;
-}
-
-.character-name h3 {
-  margin: 0;
-  color: #ffffff;
-}
-
-.character-name p {
-  margin: 4px 0 0;
-  color: #b9a98f;
-}
-
-.info-grid,
-.stats-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 6px;
-}
-
-.stats-grid p,
-.info-grid p {
-  background: #241a13;
-  padding: 8px;
-  border-radius: 4px;
-  margin: 0;
-}
-
-
-/* ============================================================
-   STANDARD GAME CARDS
-   Used for rank cards, quest cards, project cards, and request cards.
-   ============================================================ */
-
-.rank-card,
-.quest-card,
-.project-card,
-.request-card {
-  background: #241a13;
-  border: 1px solid #4f3824;
-  padding: 14px;
-  margin-bottom: 15px;
-  border-radius: 6px;
-}
-
-.rank-card h3,
-.quest-card h3,
-.project-card h3,
-.request-card h3 {
-  color: #e6b764;
-  margin-top: 0;
-}
-
-
-/* ============================================================
-   JOURNAL PAGE
-   This section controls journal.html.
-   ============================================================ */
-
-.journal-layout {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 20px;
-  padding: 20px;
-}
-
-.journal-list-panel h2 {
-  margin-top: 20px;
-}
-
-.journal-list-panel h2:first-child {
-  margin-top: 0;
-}
-
-.quest-list {
-  display: grid;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.journal-quest-card {
-  background: #241a13;
-  border: 1px solid #5c4329;
-  padding: 12px;
-  border-radius: 6px;
   cursor: pointer;
 }
 
-.journal-quest-card:hover {
-  border-color: #f1c36d;
-  background: #302116;
-}
 
-.journal-quest-card.active {
-  border-left: 4px solid #e6b764;
-}
-
-.journal-quest-card.completed {
-  border-left: 4px solid #6fbf73;
-  opacity: 0.9;
-}
-
-.journal-quest-card h3 {
-  margin: 0 0 6px;
-  color: #f1c36d;
-}
-
-.journal-quest-card p {
-  margin: 0;
-  color: #c9b797;
-}
-
-.quest-detail-box {
-  background: #120e0b;
-  border: 1px solid #5c4329;
-  padding: 18px;
-  border-radius: 8px;
-  line-height: 1.7;
-}
-
-.quest-detail-box h3 {
-  color: #f1c36d;
-  margin-top: 0;
-}
-
-.quest-status-active {
-  color: #e6b764;
-  font-weight: bold;
-}
-
-.quest-status-completed {
-  color: #6fbf73;
-  font-weight: bold;
-}
-
-.objective-box {
-  background: #241a13;
-  border-left: 4px solid #b88746;
-  padding: 12px;
-  margin: 12px 0;
-  border-radius: 4px;
-}
-
-
-/* ============================================================
-   SETTINGS PAGE
-   This section controls settings.html.
-   ============================================================ */
-
-.danger-card {
-  background: #241111;
-  border: 1px solid #8a2f2f;
-  padding: 14px;
-  margin-bottom: 15px;
-  border-radius: 6px;
-}
-
-.danger-card h3 {
-  color: #ff8b8b;
-  margin-top: 0;
-}
-
-.danger-button {
-  background: #6b1f1f;
-  border: 1px solid #d15a5a;
-  color: #ffe5e5;
-  margin-top: 12px;
-}
-
-.danger-button:hover {
-  background: #8a2a2a;
-}
-
-.danger-button:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-  background: #2b1a1a;
-  border-color: #5a3333;
-}
-
-
-/* ============================================================
-   GENERAL GAME MESSAGE
-   Used for warnings, confirmations, and system messages.
-   ============================================================ */
-
-.game-message {
-  background: #120f0d;
-  border: 1px solid #b88746;
-  color: #f5e6c8;
-  padding: 12px;
-  margin-top: 12px;
-  border-radius: 6px;
-}
-
-
-/* ============================================================
-   RESPONSIVE DESIGN
-   Keeps the card usable on smaller screens.
-
-   On smaller screens, the horizontal layouts collapse so the
-   player can still read and select everything.
-   ============================================================ */
-
-@media (max-width: 1200px) {
-  .creation-theme.step-4 .choice-grid {
-    grid-template-columns: repeat(3, minmax(190px, 1fr));
-  }
-
-  .creation-theme.step-7 .choice-grid {
-    grid-template-columns: repeat(2, minmax(230px, 1fr));
-  }
-
-  .creation-theme.step-4 .creation-card,
-  .creation-theme.step-5 .creation-card,
-  .creation-theme.step-7 .creation-card {
-    width: min(96vw, 1100px);
-  }
-
-  .creation-theme.step-4 .creation-card-content,
-  .creation-theme.step-5 .creation-card-content,
-  .creation-theme.step-7 .creation-card-content {
-    max-width: 860px;
-    padding-right: 85px;
-    padding-left: 85px;
-  }
-}
-
-@media (max-width: 1000px) {
-  .game-layout,
-  .journal-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .top-bar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .creation-page {
-    padding: 12px;
-  }
-
-  .creation-card,
-  .creation-theme.step-4 .creation-card,
-  .creation-theme.step-5 .creation-card,
-  .creation-theme.step-7 .creation-card,
-  .creation-theme.step-8 .creation-card {
-    width: 100%;
-    min-height: 850px;
-  }
-
-  .creation-card-content,
-  .creation-theme.step-4 .creation-card-content,
-  .creation-theme.step-5 .creation-card-content,
-  .creation-theme.step-7 .creation-card-content,
-  .creation-theme.step-8 .creation-card-content {
-    max-width: 760px;
-    min-height: 850px;
-
-    padding-top: 130px;
-    padding-right: 70px;
-    padding-bottom: 115px;
-    padding-left: 70px;
-  }
-
-  .creation-card-content h1 {
-    font-size: 1.8rem;
-  }
-
-  .choice-grid,
-  .creation-theme.step-4 .choice-grid,
-  .creation-theme.step-5 .choice-grid,
-  .creation-theme.step-7 .choice-grid {
-    grid-template-columns: repeat(2, minmax(180px, 1fr));
-    gap: 12px;
-  }
-
-  .bg-dragon-overlay {
-    background-position: center center;
-  }
-}
-
-@media (max-width: 700px) {
-  .creation-card,
-  .creation-theme.step-4 .creation-card,
-  .creation-theme.step-5 .creation-card,
-  .creation-theme.step-7 .creation-card,
-  .creation-theme.step-8 .creation-card {
-    min-height: 950px;
-  }
-
-  .creation-card-content,
-  .creation-theme.step-4 .creation-card-content,
-  .creation-theme.step-5 .creation-card-content,
-  .creation-theme.step-7 .creation-card-content,
-  .creation-theme.step-8 .creation-card-content {
-    min-height: 950px;
-
-    padding-top: 125px;
-    padding-right: 45px;
-    padding-bottom: 105px;
-    padding-left: 45px;
-  }
-
-  .creation-card-content h1 {
-    font-size: 1.45rem;
-  }
-
-  .story-text,
-  .creation-form {
-    font-size: 0.92rem;
-    line-height: 1.6;
-  }
-
-  .choice-grid,
-  .creation-theme.step-4 .choice-grid,
-  .creation-theme.step-5 .choice-grid,
-  .creation-theme.step-7 .choice-grid {
-    grid-template-columns: 1fr;
-  }
-
-  button {
-    padding: 10px 18px;
-    font-size: 0.9rem;
-  }
-/* ============================================================
-   NAVIGATION LINK BUTTONS
-   Makes <a> links look like normal buttons.
-   ============================================================ */
-
-nav {
-  position: relative;
-  z-index: 50;
-}
-
-.nav-button {
-  display: inline-block;
-  padding: 8px 12px;
-  border: 1px solid #8a5a24;
-  border-radius: 4px;
-  background: #24170f;
-  color: #f2c36b;
-  text-decoration: none;
-  font-family: inherit;
-  font-size: inherit;
-  cursor: pointer;
-  pointer-events: auto;
-}
-
-.nav-button:hover {
-  background: #3a2415;
-  color: #ffd98a;
-}
-/* ============================================================
-   FIX TOP NAVIGATION BUTTON/LINK STYLING
-   Makes <a> links and <button> items match in the top bar.
-   ============================================================ */
-
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
-
-.top-bar nav {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  position: relative;
-  z-index: 50;
-}
-
-.top-bar nav button,
-.top-bar nav .nav-button,
-.top-bar nav a.nav-button {
-  display: inline-block;
-  padding: 8px 12px;
-  border: 1px solid #8a5a24;
-  border-radius: 4px;
-  background: #24170f;
-  color: #f2c36b;
-  text-decoration: none;
-  font-family: inherit;
-  font-size: 0.9rem;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.top-bar nav button:hover,
-.top-bar nav .nav-button:hover,
-.top-bar nav a.nav-button:hover {
-  background: #3a2415;
-  color: #ffd98a;
-}
 /* ============================================================
    UNIVERSAL SIDE NAVIGATION
-   Torn-style always-available side menu.
+   Torn-style always-available left menu.
+   Created by js/navigation.js.
    ============================================================ */
 
 .universal-side-nav {
@@ -1132,7 +85,6 @@ nav {
   border-right: 1px solid #5c3a1d;
   padding: 12px;
   z-index: 9999;
-  box-sizing: border-box;
 }
 
 .side-nav-title {
@@ -1145,6 +97,7 @@ nav {
   margin: 0;
   color: #ffcc74;
   font-size: 1.2rem;
+  letter-spacing: 1px;
 }
 
 .side-nav-title p {
@@ -1186,20 +139,33 @@ nav {
 
 
 /* ============================================================
-   PAGE OFFSET FOR SIDE NAV
-   Pushes all page content to the right so the menu does not cover it.
+   TOP BAR
+   Used on home, character, journal, settings.
+   Old top nav is hidden because the universal side nav handles it.
    ============================================================ */
 
-body {
-  padding-left: 220px;
-  box-sizing: border-box;
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  min-height: 60px;
+  padding: 12px 18px;
+  background: #2a170d;
+  border-bottom: 1px solid #5c3a1d;
 }
 
+.top-bar h1 {
+  margin: 0;
+  color: #ffcc74;
+  letter-spacing: 1px;
+}
 
-/* ============================================================
-   OLD TOP NAV CLEANUP
-   Hides old top nav buttons if we are using the universal side menu.
-   ============================================================ */
+.top-bar p {
+  margin: 2px 0 0;
+  color: #d6bd8a;
+  font-size: 0.9rem;
+}
 
 .top-bar nav {
   display: none;
@@ -1207,11 +173,493 @@ body {
 
 
 /* ============================================================
-   RESPONSIVE SIDE NAV
-   On small screens, menu becomes normal top block.
+   GENERAL PANELS / CARDS
    ============================================================ */
 
+.panel {
+  background: #16100c;
+  border: 1px solid #5c3a1d;
+  border-radius: 6px;
+  padding: 16px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.45);
+}
+
+.panel h2 {
+  border-bottom: 1px solid #4f321b;
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+}
+
+.character-name {
+  background: #24180f;
+  border-left: 4px solid #ffcc74;
+  padding: 10px;
+  margin-bottom: 12px;
+}
+
+.character-name h3 {
+  margin: 0;
+}
+
+.character-name p {
+  margin: 3px 0 0;
+  color: #d7ba7d;
+}
+
+.info-grid p,
+.stats-grid p {
+  margin: 0 0 6px;
+  padding: 6px 8px;
+  background: #21150d;
+  border-radius: 3px;
+}
+
+.rank-card,
+.quest-card,
+.project-card,
+.request-card,
+.resource-card,
+.game-message {
+  background: #24180f;
+  border: 1px solid #4f321b;
+  border-radius: 6px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.rank-card h3,
+.quest-card h3,
+.project-card h3,
+.request-card h3,
+.resource-card h3 {
+  margin-bottom: 8px;
+}
+
+.resource-card h3 {
+  color: #e6b764;
+}
+
+.resource-card p {
+  margin: 8px 0;
+}
+
+
+/* ============================================================
+   HOME PAGE LAYOUT
+   ============================================================ */
+
+.game-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.character-panel {
+  min-height: 340px;
+}
+
+.main-panel {
+  min-height: 340px;
+}
+
+.side-panel {
+  min-height: 340px;
+}
+
+.level-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 3px 8px;
+  border: 1px solid rgba(255, 195, 90, 0.45);
+  border-radius: 999px;
+  color: #ffcc74;
+  background: rgba(36, 20, 10, 0.9);
+  font-size: 0.78rem;
+  vertical-align: middle;
+}
+
+
+/* ============================================================
+   CHARACTER SHEET PAGE
+   ============================================================ */
+
+.character-sheet-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+
+/* ============================================================
+   JOURNAL PAGE
+   ============================================================ */
+
+.journal-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.quest-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quest-item,
+.quest-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: #21150d;
+  border: 1px solid #4f321b;
+  border-radius: 4px;
+  color: #f2c36b;
+  text-align: left;
+}
+
+.quest-item:hover,
+.quest-button:hover {
+  background: #332015;
+}
+
+.quest-detail {
+  min-height: 260px;
+}
+
+
+/* ============================================================
+   SETTINGS PAGE
+   ============================================================ */
+
+.settings-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 20px;
+  max-width: 900px;
+}
+
+.danger-zone {
+  border-color: #8b2f2f;
+  background: #1c0d0d;
+}
+
+.danger-zone h2,
+.danger-zone h3 {
+  color: #ff7777;
+}
+
+.delete-input,
+.settings-input {
+  width: 100%;
+  padding: 10px;
+  background: #0d0805;
+  border: 1px solid #5c3a1d;
+  color: #f4e0b8;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.delete-button,
+.danger-button {
+  padding: 10px 14px;
+  border: 1px solid #b34848;
+  background: #4a1515;
+  color: #ffd0d0;
+  border-radius: 4px;
+}
+
+.delete-button:hover,
+.danger-button:hover {
+  background: #6a1c1c;
+}
+
+
+/* ============================================================
+   BUTTONS AND NAVIGATION-LIKE LINKS
+   ============================================================ */
+
+button,
+.nav-button,
+.action-button {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 1px solid #8a5a24;
+  border-radius: 4px;
+  background: #24170f;
+  color: #f2c36b;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+button:hover,
+.nav-button:hover,
+.action-button:hover {
+  background: #3a2415;
+  color: #ffd98a;
+}
+
+button:disabled,
+.action-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+/* ============================================================
+   CHARACTER CREATION PAGE
+   ============================================================ */
+
+.creation-theme {
+  min-height: 100vh;
+  padding-left: 0;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.75)),
+    url("../dragon-background-wide.png") center center / cover no-repeat fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.creation-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.creation-card-frame {
+  width: min(900px, 95vw);
+  min-height: 540px;
+  background: url("../creation-card-frame.png") center center / 100% 100% no-repeat;
+  padding: 70px 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width 0.25s ease, min-height 0.25s ease, padding 0.25s ease;
+}
+
+.creation-card {
+  width: 100%;
+  max-width: 620px;
+  background: rgba(18, 10, 5, 0.82);
+  border: 1px solid rgba(255, 204, 116, 0.35);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+.creation-card h1,
+.creation-card h2 {
+  color: #ffcc74;
+}
+
+.creation-card p {
+  color: #f3ddaa;
+}
+
+.creation-card input,
+.creation-card select {
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  background: #0d0805;
+  border: 1px solid #8a5a24;
+  color: #f4e0b8;
+  border-radius: 4px;
+}
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.choice-button {
+  padding: 12px;
+  border: 1px solid #8a5a24;
+  background: #24170f;
+  color: #f2c36b;
+  border-radius: 4px;
+}
+
+.choice-button:hover,
+.choice-button.selected {
+  background: #3a2415;
+  color: #ffd98a;
+  border-color: #ffcc74;
+}
+
+.creation-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.creation-controls button {
+  min-width: 110px;
+}
+
+
+/* Step-based resizing for character creation card. */
+
+body.step-0 .creation-card-frame,
+body.step-1 .creation-card-frame {
+  width: min(780px, 95vw);
+  min-height: 500px;
+}
+
+body.step-2 .creation-card-frame,
+body.step-3 .creation-card-frame,
+body.step-4 .creation-card-frame,
+body.step-5 .creation-card-frame {
+  width: min(940px, 95vw);
+  min-height: 620px;
+}
+
+body.step-6 .creation-card-frame,
+body.step-7 .creation-card-frame,
+body.step-8 .creation-card-frame {
+  width: min(1000px, 96vw);
+  min-height: 660px;
+}
+
+
+/* ============================================================
+   FUTURE COMBAT PAGE BASE STYLES
+   ============================================================ */
+
+.combat-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.combat-stat-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 8px;
+  background: #21150d;
+  border-radius: 3px;
+  margin-bottom: 6px;
+}
+
+.enemy-sprite-wrap {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.enemy-sprite {
+  width: 220px;
+  image-rendering: pixelated;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.enemy-hit {
+  animation: enemyHitFlash 0.35s ease;
+}
+
+@keyframes enemyHitFlash {
+  0% {
+    filter:
+      brightness(1.6)
+      sepia(1)
+      saturate(6)
+      hue-rotate(-20deg)
+      drop-shadow(0 0 12px rgba(255, 0, 0, 0.95))
+      drop-shadow(0 0 22px rgba(255, 50, 50, 0.8));
+    transform: scale(1.05);
+  }
+
+  50% {
+    filter:
+      brightness(2)
+      sepia(1)
+      saturate(8)
+      hue-rotate(-25deg)
+      drop-shadow(0 0 18px rgba(255, 0, 0, 1))
+      drop-shadow(0 0 30px rgba(255, 80, 80, 0.95));
+    transform: scale(1.08);
+  }
+
+  100% {
+    filter: none;
+    transform: scale(1);
+  }
+}
+
+.combat-log {
+  min-height: 160px;
+  max-height: 280px;
+  overflow-y: auto;
+  background: #0d0805;
+  border: 1px solid #4f321b;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+
+.hidden {
+  display: none !important;
+}
+
+.text-muted {
+  color: #b99a65;
+}
+
+.text-warning {
+  color: #ffcc74;
+}
+
+.text-danger {
+  color: #ff7777;
+}
+
+.text-success {
+  color: #9be28b;
+}
+
+
+/* ============================================================
+   RESPONSIVE DESIGN
+   ============================================================ */
+
+@media (max-width: 1100px) {
+  .game-layout,
+  .character-sheet-layout,
+  .combat-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .journal-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 900px) {
+  body {
+    padding-left: 0;
+  }
+
   .universal-side-nav {
     position: relative;
     width: 100%;
@@ -1220,11 +668,41 @@ body {
     border-bottom: 1px solid #5c3a1d;
   }
 
-  body {
-    padding-left: 0;
+  .top-bar {
+    padding: 12px;
   }
 
-  .top-bar nav {
-    display: none;
+  .game-layout,
+  .character-sheet-layout,
+  .journal-layout,
+  .settings-layout,
+  .combat-layout {
+    padding: 12px;
+  }
+
+  .creation-card-frame {
+    padding: 45px 35px;
+  }
+
+  .choice-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+
+  .creation-card-frame {
+    padding: 35px 20px;
+  }
+
+  .creation-card {
+    padding: 20px;
+  }
+
+  .creation-controls {
+    flex-direction: column;
   }
 }
