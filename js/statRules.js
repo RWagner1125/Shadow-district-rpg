@@ -183,7 +183,69 @@ function rollDamage(rawAttack) {
     roll
   };
 }
+/* ============================================================
+   WEAKNESS DAMAGE MODIFIER
+   ============================================================
 
+   Weakness modifiers are stored as bonus damage.
+
+   Example:
+   Enemy weakness:
+   modifier: 0.25
+
+   This means:
+   +25% bonus damage
+
+   Formula:
+   weaknessBonus = rawAttackPower * modifier
+   finalAttackPower = rawAttackPower + weaknessBonus
+
+   Example:
+   rawAttackPower = 3.5
+   modifier = 0.25
+
+   weaknessBonus = 3.5 * 0.25 = 0.875
+   finalAttackPower = 3.5 + 0.875 = 4.375
+
+   Then finalAttackPower goes into calculateDamageRange().
+   ============================================================ */
+
+function applyWeaknessModifier(rawAttackPower, attackDamageType, enemy) {
+  if (!enemy || !enemy.weaknesses || enemy.weaknesses.length === 0) {
+    return {
+      weaknessApplied: false,
+      weaknessType: null,
+      weaknessModifier: 0,
+      weaknessBonus: 0,
+      finalAttackPower: rawAttackPower
+    };
+  }
+
+  const matchingWeakness = enemy.weaknesses.find(function (weakness) {
+    return weakness.damageType.toLowerCase() === attackDamageType.toLowerCase();
+  });
+
+  if (!matchingWeakness) {
+    return {
+      weaknessApplied: false,
+      weaknessType: null,
+      weaknessModifier: 0,
+      weaknessBonus: 0,
+      finalAttackPower: rawAttackPower
+    };
+  }
+
+  const weaknessBonus = rawAttackPower * matchingWeakness.modifier;
+  const finalAttackPower = rawAttackPower + weaknessBonus;
+
+  return {
+    weaknessApplied: true,
+    weaknessType: matchingWeakness.damageType,
+    weaknessModifier: matchingWeakness.modifier,
+    weaknessBonus,
+    finalAttackPower
+  };
+}
 /* ============================================================
    STAMINA ACTION COSTS
    ============================================================ */
