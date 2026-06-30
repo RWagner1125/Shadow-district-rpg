@@ -1,0 +1,818 @@
+[
+  {
+    "enemyId": "ENM_ALLEY_RAT_002",
+    "name": "Alley Rat",
+    "level": 2,
+    "maxLife": 15,
+    "stats": {
+      "strength": 1,
+      "vitality": 2,
+      "speed": 2,
+      "intelligence": null,
+      "wisdom": null,
+      "dexterity": 1
+    },
+    "debuffs": [
+      {
+        "name": "Plague",
+        "chancePercent": 2,
+        "trigger": "perAttack"
+      }
+    ],
+    "location": {
+      "town": "Town",
+      "area": "Alleys"
+    },
+    "lootTable": [
+      {
+        "itemId": "GOLD",
+        "name": "Gold",
+        "amount": 2,
+        "dropChancePercent": 75
+      },
+      {
+        "itemId": "ITM_RAT_MEAT_001",
+        "name": "Rat Meat",
+        "amount": 1,
+        "dropChancePercent": 10
+      },
+      {
+        "itemId": "ITM_GOLD_RING_001",
+        "name": "Gold Ring",
+        "amount": 1,
+        "dropChancePercent": 5,
+        "questOnly": true
+      }
+    ],
+    "weaknesses": [
+      {
+        "damageType": "Blunt",
+        "modifier": 0.25
+      }
+    ],
+    "experienceReward": 5
+  },
+  {
+    "enemyId": "ENM_BARN_SPIDER_003",
+    "name": "Barn Spider",
+    "level": 3,
+    "maxLife": 25,
+    "stats": {
+      "strength": 1,
+      "vitality": 2,
+      "speed": 3,
+      "intelligence": null,
+      "wisdom": null,
+      "dexterity": 2
+    },
+    "debuffs": [
+      {
+        "name": "Poison",
+        "chancePercent": 5,
+        "trigger": "perAttack",
+        "damagePerPlayerAction": 2,
+        "removedBy": "Remedy"
+      }
+    ],
+    "location": {
+      "town": "Farm",
+      "area": "Barn",
+      "note": "Found during work"
+    },
+    "lootTable": [
+      {
+        "itemId": "GOLD",
+        "name": "Gold",
+        "amount": 2,
+        "dropChancePercent": 75
+      },
+      {
+        "itemId": "ITM_SPIDER_LEGS_001",
+        "name": "Spider Legs",
+        "amount": 1,
+        "dropChancePercent": 15
+      }
+    ],
+    "weaknesses": [
+      {
+        "damageType": "Slash",
+        "modifier": 0.25
+      }
+    ],
+    "experienceReward": 7
+  },
+  {
+    "enemyId": "ENM_FIELD_RAT_005",
+    "name": "Field Rat",
+    "level": 5,
+    "maxLife": 35,
+    "stats": {
+      "strength": 2,
+      "vitality": 3,
+      "speed": 3,
+      "intelligence": null,
+      "wisdom": null,
+      "dexterity": 3
+    },
+    "debuffs": [
+      {
+        "name": "Plague",
+        "chancePercent": 5,
+        "trigger": "perAttack"
+      }
+    ],
+    "location": {
+      "town": "Farm",
+      "area": "Field Work"
+    },
+    "lootTable": [
+      {
+        "itemId": "GOLD",
+        "name": "Gold",
+        "amount": 2,
+        "dropChancePercent": 75
+      },
+      {
+        "itemId": "ITM_RAT_MEAT_001",
+        "name": "Rat Meat",
+        "amount": 1,
+        "dropChancePercent": 15
+      }
+    ],
+    "weaknesses": [
+      {
+        "damageType": "Blunt",
+        "modifier": 0.25
+      }
+    ],
+    "experienceReward": 10
+  },
+  {
+    "enemyId": "ENM_GHAST_002",
+    "name": "Ghast",
+    "level": 2,
+    "maxLife": 15,
+    "stats": {
+      "strength": 0,
+      "vitality": 3,
+      "speed": 1,
+      "intelligence": 2,
+      "wisdom": 2,
+      "dexterity": 0
+    },
+    "debuffs": [
+      {
+        "name": "Haunt",
+        "chancePercent": 2,
+        "trigger": "perAttack"
+      }
+    ],
+    "location": {
+      "town": "Church",
+      "area": "Underground"
+    },
+    "lootTable": [
+      {
+        "itemId": "GOLD",
+        "name": "Gold",
+        "amount": 2,
+        "dropChancePercent": 75
+      },
+      {
+        "itemId": "ITM_BROKEN_SOULSHARD_001",
+        "name": "Broken Soulshard",
+        "amount": 1,
+        "dropChancePercent": 5
+      }
+    ],
+    "weaknesses": [
+      {
+        "damageType": "Holy",
+        "modifier": 0.25
+      }
+    ],
+    "experienceReward": 5
+  },
+  {
+    "enemyId": "ENM_LESSER_UNDEAD_005",
+    "name": "Lesser Undead",
+    "level": 5,
+    "maxLife": 40,
+    "stats": {
+      "strength": 2,
+      "vitality": 4,
+      "speed": 1,
+      "intelligence": null,
+      "wisdom": null,
+      "dexterity": 1
+    },
+    "debuffs": [
+      {
+        "name": "Plague",
+        "chancePercent": 2,
+        "trigger": "perAttack"
+      }
+    ],
+    "location": {
+      "town": "Church",
+      "area": "Graveyard"
+    },
+    "lootTable": [
+      {
+        "itemId": "GOLD",
+        "name": "Gold",
+        "amount": 2,
+        "dropChancePercent": 75
+      },
+      {
+        "itemId": "ITM_ROTTEN_FLESH_001",
+        "name": "Rotten Flesh",
+        "amount": 1,
+        "dropChancePercent": 5
+      }
+    ],
+    "weaknesses": [
+      {
+        "damageType": "Holy",
+        "modifier": 0.25
+      }
+    ],
+    "experienceReward": 10
+  },
+  {
+    "enemyId": "ENM_PIGEON_002",
+    "name": "Pigeon",
+    "level": 2,
+    "maxLife": 25,
+    "stats": {
+      "strength": 2,
+      "vitality": 2,
+      "speed": 2,
+      "intelligence": null,
+      "wisdom": null,
+      "dexterity": 2
+    },
+    "debuffs": [],
+    "location": {
+      "town": "City",
+      "area": "Hunting Grounds"
+    },
+    "lootTable": [
+      {
+        "itemId": "GOLD",
+        "name": "Gold",
+        "amount": 2,
+        "dropChancePercent": 75
+      },
+      {
+        "itemId": "ITM_PIGEON_FEATHER_001",
+        "name": "Pigeon Feather",
+        "amount": 1,
+        "dropChancePercent": 10
+      },
+      {
+        "itemId": "ITM_PIGEON_MEAT_001",
+        "name": "Pigeon Meat",
+        "amount": 1,
+        "dropChancePercent": 15
+      }
+    ],
+    "requirements": {
+      "attackRestriction": "Only attackable by ranged equipment"
+    },
+    "weaknesses": [],
+    "experienceReward": 5
+  },
+  {
+    "enemyId": "ENM_SPARROW_005",
+    "name": "Sparrow",
+    "level": 5,
+    "maxLife": 40,
+    "stats": {
+      "strength": 2,
+      "vitality": 3,
+      "speed": 4,
+      "intelligence": null,
+      "wisdom": null,
+      "dexterity": 3
+    },
+    "debuffs": [],
+    "location": {
+      "town": "Outer City",
+      "area": "Hunting Grounds"
+    },
+    "lootTable": [
+      {
+        "itemId": "GOLD",
+        "name": "Gold",
+        "amount": 3,
+        "dropChancePercent": 75
+      },
+      {
+        "itemId": "ITM_SPARROW_FEATHER_001",
+        "name": "Sparrow Feather",
+        "amount": 1,
+        "dropChancePercent": 5
+      },
+      {
+        "itemId": "ITM_SPARROW_MEAT_001",
+        "name": "Sparrow Meat",
+        "amount": 1,
+        "dropChancePercent": 10
+      }
+    ],
+    "requirements": {
+      "attackRestriction": "Only attackable by ranged equipment"
+    },
+    "weaknesses": [],
+    "experienceReward": 10
+  },
+  {
+    "enemyId": "ENM_STREET_PICKPOCKET_005",
+    "name": "Street Pickpocket",
+    "level": 5,
+    "maxLife": 50,
+    "stats": {
+      "strength": 1,
+      "vitality": 3,
+      "speed": 3,
+      "intelligence": null,
+      "wisdom": null,
+      "dexterity": 3
+    },
+    "debuffs": [],
+    "specialEffects": [
+      {
+        "name": "Steal Gold",
+        "chancePercent": 2,
+        "trigger": "perTurn",
+        "goldStolen": 2
+      }
+    ],
+    "location": {
+      "town": "City",
+      "area": "Back Alleys"
+    },
+    "lootTable": [
+      {
+        "itemId": "GOLD",
+        "name": "Gold",
+        "amount": 3,
+        "dropChancePercent": 75
+      },
+      {
+        "itemId": "WPN_SMALL_KNIFE_001",
+        "name": "Small Knife",
+        "amount": 1,
+        "dropChancePercent": 5
+      },
+      {
+        "itemId": "ITM_MEAD_001",
+        "name": "Mead",
+        "amount": 1,
+        "dropChancePercent": 5
+      }
+    ],
+    "weaknesses": [
+      {
+        "damageType": "Slash",
+        "modifier": 0.25
+      }
+    ],
+    "experienceReward": 15
+  },
+  {
+    "enemyId": "ENM_GARDEN_SNAKE_002",
+    "name": "Garden Snake",
+    "level": 2,
+    "maxLife": 25,
+    "stats": {
+      "strength": 1,
+      "vitality": 2,
+      "speed": 2,
+      "intelligence": null,
+      "wisdom": null,
+      "dexterity": 1
+    },
+    "debuffs": [
+      {
+        "name": "Poison",
+        "chancePercent": 5,
+        "trigger": "perAttack",
+        "damagePerPlayerAction": 2,
+        "removedBy": "Remedy"
+      }
+    ],
+    "location": {
+      "town": "Village",
+      "area": "Fields"
+    },
+    "encounterRules": {
+      "activity": "Herb Gathering",
+      "chancePercent": 25
+    },
+    "lootTable": [
+      {
+        "itemId": "GOLD",
+        "name": "Gold",
+        "amount": 2,
+        "dropChancePercent": 75
+      },
+      {
+        "itemId": "ITM_SNAKE_MEAT_001",
+        "name": "Snake Meat",
+        "amount": 1,
+        "dropChancePercent": 10
+      }
+    ],
+    "weaknesses": [
+      {
+        "damageType": "Slash",
+        "modifier": 0.25
+      }
+    ],
+    "experienceReward": 5
+  },
+  {
+    "enemyId": "ENM_VENOM_SNAKE_005",
+    "name": "Venom Snake",
+    "level": 5,
+    "maxLife": 35,
+    "stats": {
+      "strength": 2,
+      "vitality": 3,
+      "speed": 3,
+      "intelligence": null,
+      "wisdom": null,
+      "dexterity": 2
+    },
+    "debuffs": [
+      {
+        "name": "Poison",
+        "chancePercent": 5,
+        "trigger": "perAttack",
+        "damagePerPlayerAction": 2,
+        "removedBy": "Remedy"
+      }
+    ],
+    "location": {
+      "town": "Village",
+      "area": "Outer Fields"
+    },
+    "encounterRules": {
+      "activity": "Herb Gathering",
+      "chancePercent": 45
+    },
+    "lootTable": [
+      {
+        "itemId": "GOLD",
+        "name": "Gold",
+        "amount": 3,
+        "dropChancePercent": 75
+      },
+      {
+        "itemId": "ITM_SNAKE_MEAT_001",
+        "name": "Snake Meat",
+        "amount": 1,
+        "dropChancePercent": 10
+      },
+      {
+        "itemId": "ITM_SNAKE_SKIN_001",
+        "name": "Snake Skin",
+        "amount": 1,
+        "dropChancePercent": 5
+      }
+    ],
+    "weaknesses": [
+      {
+        "damageType": "Slash",
+        "modifier": 0.25
+      }
+    ],
+    "experienceReward": 10
+  },
+  {
+    "enemyId": "ENM_TOME_002",
+    "name": "Tome",
+    "level": 2,
+    "maxLife": 20,
+    "stats": {
+      "strength": 0,
+      "vitality": 2,
+      "speed": 1,
+      "intelligence": 5,
+      "wisdom": 3,
+      "dexterity": 0
+    },
+    "debuffs": [],
+    "location": {
+      "town": "Library",
+      "area": "Study Room"
+    },
+    "lootTable": [
+      {
+        "itemId": "GOLD",
+        "name": "Gold",
+        "amount": 2,
+        "dropChancePercent": 75
+      },
+      {
+        "itemId": "ITM_PAPER_001",
+        "name": "Paper",
+        "amount": 1,
+        "dropChancePercent": 10
+      }
+    ],
+    "weaknesses": [
+      {
+        "damageType": "Fire",
+        "modifier": 0.25
+      }
+    ],
+    "experienceReward": 5
+  },
+  {
+    "enemyId": "ENM_TOME_005",
+    "name": "Tome",
+    "level": 5,
+    "maxLife": 50,
+    "stats": {
+      "strength": 0,
+      "vitality": 3,
+      "speed": 2,
+      "intelligence": 5,
+      "wisdom": 5,
+      "dexterity": 0
+    },
+    "debuffs": [],
+    "location": {
+      "town": "Library",
+      "area": "Inner Studies"
+    },
+    "lootTable": [
+      {
+        "itemId": "GOLD",
+        "name": "Gold",
+        "amount": 3,
+        "dropChancePercent": 75
+      },
+      {
+        "itemId": "ITM_PAPER_001",
+        "name": "Paper",
+        "amount": 1,
+        "dropChancePercent": 10
+      }
+    ],
+    "weaknesses": [
+      {
+        "damageType": "Water",
+        "modifier": 0.25
+      }
+    ],
+    "experienceReward": 10
+  },
+  {
+    "enemyId": "ENM_KOBOLD_002",
+    "name": "Kobold",
+    "level": 2,
+    "maxLife": 25,
+    "stats": {
+      "strength": 2,
+      "vitality": 1,
+      "speed": 1,
+      "intelligence": null,
+      "wisdom": null,
+      "dexterity": 1
+    },
+    "debuffs": [],
+    "location": {
+      "town": "Mines",
+      "area": "Outer Mines"
+    },
+    "lootTable": [
+      {
+        "itemId": "GOLD",
+        "name": "Gold",
+        "amount": 2,
+        "dropChancePercent": 75
+      },
+      {
+        "itemId": "ITM_ROCK_001",
+        "name": "Rock",
+        "amount": 1,
+        "dropChancePercent": 15
+      }
+    ],
+    "weaknesses": [],
+    "experienceReward": 5
+  },
+  {
+    "enemyId": "ENM_KOBOLD_005",
+    "name": "Kobold",
+    "level": 5,
+    "maxLife": 50,
+    "stats": {
+      "strength": 3,
+      "vitality": 3,
+      "speed": 2,
+      "intelligence": null,
+      "wisdom": null,
+      "dexterity": 2
+    },
+    "debuffs": [],
+    "location": {
+      "town": "Mines",
+      "area": "Mines Area 2"
+    },
+    "lootTable": [
+      {
+        "itemId": "GOLD",
+        "name": "Gold",
+        "amount": 3,
+        "dropChancePercent": 75
+      },
+      {
+        "itemId": "ITM_ROCK_001",
+        "name": "Rock",
+        "amount": 1,
+        "dropChancePercent": 20
+      }
+    ],
+    "weaknesses": [],
+    "experienceReward": 15
+  },
+  {
+    "enemyId": "ENM_ELITE_KOBOLD_005",
+    "name": "Elite Kobold",
+    "level": 5,
+    "maxLife": 100,
+    "stats": {
+      "strength": 5,
+      "vitality": 5,
+      "speed": 5,
+      "intelligence": null,
+      "wisdom": null,
+      "dexterity": 5
+    },
+    "debuffs": [],
+    "location": {
+      "town": "Mines",
+      "area": "Inner Mines"
+    },
+    "lootTable": [
+      {
+        "itemId": "GOLD",
+        "name": "Gold",
+        "amount": 5,
+        "dropChancePercent": 45
+      },
+      {
+        "itemId": "ITM_GLITTERING_ROCK_001",
+        "name": "Glittering Rock",
+        "amount": 1,
+        "dropChancePercent": 5
+      }
+    ],
+    "weaknesses": [],
+    "experienceReward": 25,
+    "availability": {
+      "questOnly": true,
+      "requirement": "Available during the quest to clear the Inner Mines. Defeating this enemy unlocks access to the Inner Mines."
+    }
+  },
+  {
+    "enemyId": "ENM_KOBOLD_TANK_007",
+    "name": "Kobold Tank",
+    "level": 7,
+    "maxLife": 100,
+    "stats": {
+      "strength": 5,
+      "vitality": 10,
+      "speed": 2,
+      "intelligence": null,
+      "wisdom": null,
+      "dexterity": 2
+    },
+    "debuffs": [],
+    "location": {
+      "town": "Mines",
+      "area": "Inner Mines"
+    },
+    "lootTable": [
+      {
+        "itemId": "GOLD",
+        "name": "Gold",
+        "amount": 10,
+        "dropChancePercent": 25
+      },
+      {
+        "itemId": "ARM_ROUND_SHIELD_001",
+        "name": "Round Shield",
+        "amount": 1,
+        "dropChancePercent": 5
+      },
+      {
+        "itemId": "ITM_SILVER_TOOTH_001",
+        "name": "Silver Tooth",
+        "amount": 1,
+        "dropChancePercent": 1
+      }
+    ],
+    "weaknesses": [],
+    "experienceReward": 35,
+    "availability": {
+      "questOnly": false,
+      "requirement": "Only available after clearing the Inner Mines Elite Kobold."
+    }
+  },
+  {
+    "enemyId": "ENM_KOBOLD_AXE_THROWER_007",
+    "name": "Kobold Axe Thrower",
+    "level": 7,
+    "maxLife": 75,
+    "stats": {
+      "strength": 2,
+      "vitality": 5,
+      "speed": 3,
+      "intelligence": null,
+      "wisdom": null,
+      "dexterity": 5
+    },
+    "debuffs": [],
+    "location": {
+      "town": "Mines",
+      "area": "Inner Mines"
+    },
+    "lootTable": [
+      {
+        "itemId": "GOLD",
+        "name": "Gold",
+        "amount": 10,
+        "dropChancePercent": 25
+      },
+      {
+        "itemId": "WPN_BROKEN_AXE_001",
+        "name": "Broken Axe",
+        "amount": 1,
+        "dropChancePercent": 5
+      },
+      {
+        "itemId": "ITM_SILVER_TOOTH_001",
+        "name": "Silver Tooth",
+        "amount": 1,
+        "dropChancePercent": 0.5
+      }
+    ],
+    "weaknesses": [],
+    "experienceReward": 25,
+    "availability": {
+      "questOnly": false,
+      "requirement": "Only available after clearing the Inner Mines Elite Kobold."
+    }
+  },
+  {
+    "enemyId": "ENM_KOBOLD_007",
+    "name": "Kobold",
+    "level": 7,
+    "maxLife": 50,
+    "stats": {
+      "strength": 2,
+      "vitality": 3,
+      "speed": 3,
+      "intelligence": null,
+      "wisdom": null,
+      "dexterity": 5
+    },
+    "debuffs": [],
+    "location": {
+      "town": "Mines",
+      "area": "Inner Mines"
+    },
+    "lootTable": [
+      {
+        "itemId": "GOLD",
+        "name": "Gold",
+        "amount": 10,
+        "dropChancePercent": 25
+      },
+      {
+        "itemId": "ITM_ROCK_001",
+        "name": "Rock",
+        "amount": 1,
+        "dropChancePercent": 25
+      },
+      {
+        "itemId": "ITM_SILVER_TOOTH_001",
+        "name": "Silver Tooth",
+        "amount": 1,
+        "dropChancePercent": 0.5
+      }
+    ],
+    "weaknesses": [],
+    "experienceReward": 20,
+    "availability": {
+      "questOnly": false,
+      "requirement": "Only available after clearing the Inner Mines Elite Kobold."
+    }
+  }
+]
