@@ -247,6 +247,124 @@ function applyWeaknessModifier(rawAttackPower, attackDamageType, enemy) {
   };
 }
 /* ============================================================
+   DEBUFF ROLL AND APPLICATION RULES
+   ============================================================
+
+   Monsters can apply debuffs based on chance.
+
+   Example:
+   Alley Rat has:
+   Plague, 2% chance per attack
+
+   Formula:
+   roll = random number from 1 to 100
+   if roll <= chancePercent, debuff applies
+   ============================================================ */
+
+function rollPercentChance(chancePercent) {
+  const roll = Math.random() * 100;
+
+  return {
+    roll,
+    success: roll <= chancePercent
+  };
+}
+
+function rollEnemyDebuff(enemyDebuff) {
+  if (!enemyDebuff || enemyDebuff.chancePercent === undefined) {
+    return {
+      success: false,
+      roll: null,
+      chancePercent: 0
+    };
+  }
+
+  const result = rollPercentChance(enemyDebuff.chancePercent);
+
+  return {
+    success: result.success,
+    roll: result.roll,
+    chancePercent: enemyDebuff.chancePercent,
+    debuffId: enemyDebuff.debuffId || null,
+    name: enemyDebuff.name || null,
+    trigger: enemyDebuff.trigger || "perEnemyAttack"
+  };
+}
+
+function addDebuffToCharacter(character, debuffData) {
+  if (!character.activeDebuffs) {
+    character.activeDebuffs = [];
+  }
+
+  const alreadyHasDebuff = character.activeDebuffs.find(function (activeDebuff) {
+    return activeDebuff.debuffId === debuffData.debuffId;
+  });
+
+  if (alreadyHasDebuff && debuffData.canStack === false) {
+    alreadyHasDebuff.remainingTurns = debuffData.defaultDurationTurns;
+    return {
+      applied: false,
+      refreshed: true,
+      character
+    };
+  }
+
+  character.activeDebuffs.push({
+    debuffId: debuffData.debuffId,
+    name: debuffData.name,
+    type: debuffData.type,
+    remainingTurns: debuffData.defaultDurationTurns,
+    durationType: debuffData.durationType,
+    effects: debuffData.effects,
+    combatMessage: debuffData.combatMessage
+  });
+
+  return {
+    applied: true,
+    refreshed: false,
+    character
+  };
+}
+
+function applyPlayerActionDebuffs(character) {
+  if (!character.activeDebuffs || character.activeDebuffs.length === 0) {
+    return {
+      character,
+      totalLifeDamage: 0,
+      messages: []
+    };
+  }
+
+  let totalLifeDamage = 0;
+  const messages = [];
+
+  character.activeDebuffs.forEach(function (debuff) {
+    if (
+      debuff.effects &&
+      debuff.effects.lifeDamagePerPlayerAction &&
+      debuff.effects.lifeDamagePerPlayerAction > 0
+    ) {
+      const damage = debuff.effects.lifeDamagePerPlayerAction;
+
+      totalLifeDamage += damage;
+      messages.push(debuff.combatMessage || `${debuff.name} deals ${damage} damage.`);
+    }
+  });
+
+  if (totalLifeDamage > 0 && character.resources) {
+    character.resources.currentLife = Math.max(
+      0,
+      character.resources.currentLife - totalLifeDamage
+    );
+  }
+
+  return {
+    character,
+    totalLifeDamage,
+    messages
+  };
+}
+/* ============================================================
    STAMINA ACTION COSTS
    ============================================================ */
 
@@ -936,11 +1054,18 @@ window.AshesDustStats = {
   WISDOM_PRAYER_CONVERSION_BY_CLASS_TIER,
   MANA_RULES_BY_CLASS,
 
-  normalizeRoleKey,
-  calculateDamageRange,
-  rollDamage,
-  applyWeaknessModifier,
-  getExperienceNeededForNextLevel,
+normalizeRoleKey,
+
+calculateDamageRange,
+rollDamage,
+applyWeaknessModifier,
+
+rollPercentChance,
+rollEnemyDebuff,
+addDebuffToCharacter,
+applyPlayerActionDebuffs,
+
+getExperienceNeededForNextLevel,
 
   getHpCap,
   calculateMaxLifeFromVitality,
