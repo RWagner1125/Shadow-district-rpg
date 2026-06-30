@@ -1045,10 +1045,15 @@ nav button {
     padding: 10px 18px;
     font-size: 0.9rem;
   }
-   /* ============================================================
+/* ============================================================
    NAVIGATION LINK BUTTONS
    Makes <a> links look like normal buttons.
    ============================================================ */
+
+nav {
+  position: relative;
+  z-index: 50;
+}
 
 .nav-button {
   display: inline-block;
@@ -1061,6 +1066,7 @@ nav button {
   font-family: inherit;
   font-size: inherit;
   cursor: pointer;
+  pointer-events: auto;
 }
 
 .nav-button:hover {
