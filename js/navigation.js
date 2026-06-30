@@ -1,23 +1,6 @@
 /* ============================================================
    ASHES & DUST - UNIVERSAL SIDE NAVIGATION
-   ============================================================
-
-   FILE:
-   js/navigation.js
-
-   PURPOSE:
-   This creates one shared menu for every page.
-
-   Any page that loads this file gets the same menu:
-   - Home
-   - Character
-   - Journal
-   - Settings
-   - Future pages like Combat, Jobs, Market, Guild, etc.
-
-   This prevents us from updating every HTML file manually.
    ============================================================ */
-
 
 function createUniversalNavigation() {
   const existingNav = document.getElementById("universalSideNav");
@@ -71,6 +54,5 @@ function createUniversalNavigation() {
 
   document.body.prepend(nav);
 }
-
 
 createUniversalNavigation();
