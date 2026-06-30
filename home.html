@@ -3,29 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Ashes & Dust - Home</title>
+
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
   <header class="top-bar">
     <div>
       <h1>Ashes & Dust</h1>
       <p>NPCs control the old world. Players build the new one.</p>
     </div>
-
-<nav>
-  <a class="nav-button" href="./character.html">Character</a>
-  <a class="nav-button" href="home.html">Home</a>
-  <button>Capital</button>
-  <button>Town</button>
-  <button>Jobs</button>
-  <button>Education</button>
-  <a class="nav-button" href="journal.html">Journal</a>
-  <button>Guild</button>
-  <button>Market</button>
-  <button>World</button>
-  <a class="nav-button" href="settings.html">Settings</a>
-</nav>
   </header>
 
   <main class="game-layout">
@@ -33,7 +22,10 @@
       <h2>Character Record</h2>
 
       <div class="character-name">
-        <h3 id="homeName">Unnamed Lowborn</h3>
+        <h3>
+          <span id="homeName">Unnamed Lowborn</span>
+          <span class="level-badge">Lv <span id="homeLevel">1</span></span>
+        </h3>
         <p id="homeTitle">Lowborn Commoner</p>
       </div>
 
@@ -46,6 +38,7 @@
       </div>
 
       <h3>Visible Stats</h3>
+
       <div class="stats-grid">
         <p>Strength: <span id="homeStrength">5</span></p>
         <p>Vitality: <span id="homeVitality">5</span></p>
@@ -57,12 +50,14 @@
 
     <section class="panel main-panel">
       <h2>Lowborn Beginning</h2>
+
       <p id="welcomeText">
         You have entered the capital as one of the nameless lowborn.
       </p>
 
       <div class="rank-card">
         <h3>Next Social Rank: Recognized Citizen</h3>
+
         <ul>
           <li>Donate 25,000 gold to your capital</li>
           <li>Reach Rank 5 in Job/Work</li>
@@ -74,6 +69,7 @@
 
       <div class="quest-card">
         <h3>First Objective</h3>
+
         <p>
           Complete your origin questline and prove that your name deserves to be recorded.
         </p>
@@ -92,12 +88,11 @@
         <h3>Town Requests</h3>
         <p>No guild requests accepted yet.</p>
       </div>
-
-      
     </aside>
   </main>
+
+  <script src="js/navigation.js"></script>
   <script src="js/statRules.js"></script>
   <script src="js/home.js"></script>
-  <script src="js/navigation.js"></script>
 </body>
 </html>
