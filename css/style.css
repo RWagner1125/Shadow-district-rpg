@@ -1116,3 +1116,115 @@ nav {
   background: #3a2415;
   color: #ffd98a;
 }
+/* ============================================================
+   UNIVERSAL SIDE NAVIGATION
+   Torn-style always-available side menu.
+   ============================================================ */
+
+.universal-side-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100vh;
+  overflow-y: auto;
+  background: #120c08;
+  border-right: 1px solid #5c3a1d;
+  padding: 12px;
+  z-index: 9999;
+  box-sizing: border-box;
+}
+
+.side-nav-title {
+  border-bottom: 1px solid #5c3a1d;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+}
+
+.side-nav-title h2 {
+  margin: 0;
+  color: #ffcc74;
+  font-size: 1.2rem;
+}
+
+.side-nav-title p {
+  margin: 4px 0 0;
+  color: #c9a66b;
+  font-size: 0.8rem;
+}
+
+.side-nav-section {
+  margin-bottom: 14px;
+}
+
+.side-nav-section h3 {
+  margin: 0 0 6px;
+  padding: 5px 8px;
+  background: #2a1a10;
+  border: 1px solid #5c3a1d;
+  color: #ffcc74;
+  font-size: 0.85rem;
+}
+
+.side-nav-section a {
+  display: block;
+  padding: 7px 9px;
+  margin-bottom: 4px;
+  background: #1d130d;
+  border: 1px solid #3f2816;
+  border-radius: 4px;
+  color: #f2c36b;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.side-nav-section a:hover {
+  background: #3a2415;
+  color: #ffd98a;
+  border-color: #8a5a24;
+}
+
+
+/* ============================================================
+   PAGE OFFSET FOR SIDE NAV
+   Pushes all page content to the right so the menu does not cover it.
+   ============================================================ */
+
+body {
+  padding-left: 220px;
+  box-sizing: border-box;
+}
+
+
+/* ============================================================
+   OLD TOP NAV CLEANUP
+   Hides old top nav buttons if we are using the universal side menu.
+   ============================================================ */
+
+.top-bar nav {
+  display: none;
+}
+
+
+/* ============================================================
+   RESPONSIVE SIDE NAV
+   On small screens, menu becomes normal top block.
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .universal-side-nav {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #5c3a1d;
+  }
+
+  body {
+    padding-left: 0;
+  }
+
+  .top-bar nav {
+    display: none;
+  }
+}
